@@ -1,5 +1,10 @@
 import random
+
+max_fallos = 7
+
 class Ahorcado:
+    
+    max_fallos = 7
 
     def ingresar_palabra():
         palabra = []
@@ -40,12 +45,27 @@ class Ahorcado:
             inicio = pos + 1
         return escondida
     
-
     def genera_palabra(self):
         palabras = ['Gato', 'Perro', 'Lapiz', 'Computadora', 'Felicidad']
         palabra = random.choice(palabras)
         return palabra
+    
+    def contar_cantidad_intentos_restantes(self,max_fallos, fallos):
+        intentos_restantes = max_fallos - fallos
+        return intentos_restantes
+    
+    def letras_ingresadas(self, letras):
+        return letras
         
+        
+    def verificar_derrota(self,fallos):
+        return (max_fallos == fallos)
+        
+    def adivinar_letra(self, palabra, letra):
+        if letra in palabra:
+            return 0
+        else:
+            return 1
 
             
 if __name__ == '__main__':
