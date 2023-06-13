@@ -1,3 +1,4 @@
+import random
 class Ahorcado:
 
     def ingresar_palabra():
@@ -24,7 +25,10 @@ class Ahorcado:
     def letra_ingresada(self, letra):
         return letra
 
-    def palabra_elegida(self, palabra):
+    def palabra_ganadora(self, palabra):
+        return palabra
+
+    def palabra_ingresada(self, palabra):
         return palabra
     
     def reemplazar_simbolo(self, original, escondida, simbolo):
@@ -35,6 +39,13 @@ class Ahorcado:
             escondida = escondida[:pos] + simbolo + escondida[pos+1:]
             inicio = pos + 1
         return escondida
+    
+
+    def genera_palabra(self):
+        palabras = ['Gato', 'Perro', 'Lapiz', 'Computadora', 'Felicidad']
+        palabra = random.choice(palabras)
+        return palabra
+        
 
             
 if __name__ == '__main__':
