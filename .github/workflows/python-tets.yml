@@ -19,8 +19,8 @@ jobs:
         python-version: 3.9
 
     - name: Install dependencies
-      run: pip install -r subdir/requirements.txt
+      run: python -m pip install pytest .
       
 
     - name: Run unit tests
-      run: python -m unittest test_ahorcado.py
+      run: pytest
