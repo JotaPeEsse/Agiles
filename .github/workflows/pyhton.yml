@@ -10,8 +10,10 @@ jobs:
     runs-on: ubuntu-18-04
     steps:
       - name: Echo the message
-        run: |
-          echo "Hola Mundo"
+        run: echo "Hola Mundo"
+      - name: Dame la fecha
+        run: date
+      - run: ls -l
     
 
 
