@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Echo the message
         run: |
-          echo: "Hello Word"
+          echo "Hello Word"
     
 
 
