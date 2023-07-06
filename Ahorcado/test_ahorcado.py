@@ -1,4 +1,9 @@
 import unittest
+import coverage
+
+cov = coverage.Coverage()
+cov.start()
+
 from ahorcado import Ahorcado
 
          
@@ -84,6 +89,9 @@ class TestVerificacionLetraIncorrecta(unittest.TestCase):
         letra_ingresada = "A"
         fallo = juego.adivinar_letra(palabra_correcta, letra_ingresada)
         self.assertEqual(fallo, 1)
+
+cov.stop()
+cov.save()
 
 
 if __name__ == '__main__':
