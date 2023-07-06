@@ -1,10 +1,12 @@
 import unittest
 import coverage
+from ahorcado import Ahorcado
+
 
 cov = coverage.Coverage()
 cov.start()
 
-from ahorcado import Ahorcado
+
 
          
 class TestIngresarPalabra(unittest.TestCase):
