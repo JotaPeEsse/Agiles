@@ -18,7 +18,7 @@ class TestIntentos(unittest.TestCase):
     def test_intentos(self):
         juego = Ahorcado() 
         self.assertTrue(juego.intentos_palabra(3))
-        self.assertTrue(juego.intentos_palabra(6))
+        self.assertTrue(juego.intentos_palabra(5))
         
         
 class TestPalabraOculta(unittest.TestCase):
@@ -59,7 +59,7 @@ class TestIntentosRestantes(unittest.TestCase):
         juego.max_fallos
         fallos = 3
         intentos_restantes = juego.contar_cantidad_intentos_restantes(juego.max_fallos, fallos)
-        self.assertEqual(intentos_restantes, 4)
+        self.assertEqual(intentos_restantes, 3)
         
         
 class TestLetrasIngresadas(unittest.TestCase):
