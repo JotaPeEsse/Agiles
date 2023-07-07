@@ -1,0 +1,55 @@
+{% extends "base.html"%}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Juego del Ahorcado</title>
+    
+</head>
+
+<body>
+    {% block content %}
+    
+    <div id="juego">
+        <div id="dibujo">
+            <pre>{{ dibujo }}</pre>
+        </div>
+        <div id="palabra">
+            <h2>Palabra: {{ escondida }}</h2>
+            <h2>Palabra: {{ palabra }}</h2>
+        </div>
+        <div id="intentos">
+            <h2>Intentos restantes: {{ max_fallos - fallos }}</h2>
+        </div>
+        {% if resultado == 'ganaste' %}
+        <div id="resultado" class="ganaste">
+            <div id="resu_auto">
+            <h2>¡Ganaste!</h2>
+             </div>
+             
+            <h2>La palabra era:</h2>
+            <div id="pala_auto">
+            <h2>{{escondida}}</h2>
+              </div>
+            <a href="{{ url_for('juego') }}">Jugar de nuevo</a>
+        </div>
+        {% elif resultado == 'perdiste' %}
+        <div id="resultado" class="perdiste">
+            <h2>¡Perdiste!</h2>
+            <p>La palabra era: {{ palabra }}</p>
+            <a href="{{ url_for('juego') }}">Jugar de nuevo</a>
+        </div>
+        {% else %}
+        <div id="ingreso">
+            <form action="{{ url_for('juego') }}" method="POST">
+                <input type="text" name="letra" maxlength="1" required>
+                <button type="submit">Ingresar letra</button>
+            </form>
+        </div>
+        <a href="{{ url_for('home') }}" class="btn-black">Volver al inicio</a>
+
+        {% endif %}
+    </div>
+    {% endblock %}
+</body>
+</html>

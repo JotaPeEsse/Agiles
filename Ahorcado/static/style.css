@@ -1,0 +1,76 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    
+}
+
+h1 {
+    padding: 10px;
+    margin-bottom: 30px;
+}
+
+/* Estilos para el juego */
+#juego {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+#dibujo {
+    margin-bottom: 20px;
+}
+
+#dibujo pre {
+    font-size: 20px;
+}
+
+#palabra, #intentos {
+    margin-bottom: 20px;
+}
+
+#resultado {
+    margin-bottom: 40px;
+}
+
+.ganaste {
+    color: green;
+}
+
+.perdiste {
+    color: red;
+}
+
+#ingreso {
+    margin-top: 20px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.btn-black {
+    background-color: #000;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+  
+  .btn-black:hover {
+    background-color: #333;
+  }
+  

@@ -1,10 +1,22 @@
 import random
 
-max_fallos = 7
+max_fallos = 6
+
+palabras = ['Gato', 'Perro', 'Lapiz', 'Computadora', 'Felicidad', 
+            'Jardin', 'Avion', 'Pelota', 'Libro', 'Montaña', 'Cafe', 'Sol', 'Luna', 
+            'Rana', 'Chocolate', 'Musica', 'Playa', 'Nube', 'Puerta', 'Risa']
 
 class Ahorcado:
     
-    max_fallos = 7
+    max_fallos = 6
+
+    def verificar_repeticion_letra(self, letra, letras_ingresadas):
+        return letras_ingresadas.count(letra) >= 2
+
+    def crear_cadenas():
+        palabra = random.choice(palabras)
+        palabra_escondida = '_'*len(palabra)
+        return palabra, palabra_escondida
 
     def ingresar_palabra():
         palabra = []
@@ -23,7 +35,7 @@ class Ahorcado:
         return True
             
     def intentos_palabra(self, intentos):
-        if intentos >= 7:
+        if intentos >= 6:
             return False
         return True      
     
@@ -66,7 +78,115 @@ class Ahorcado:
             return 0
         else:
             return 1
+    
+    def crear_muñeco_ahorcado(intentos):
+        dibujo = [
+        """
+           +---+
+               |
+               |
+               |
+               |
+              ===
+        """,
+        """
+           +---+
+           O   |
+               |
+               |
+               |
+              ===
+        """,
+        """
+           +---+
+           O   |
+           |   |
+               |
+               |
+              ===
+        """,
+        """
+           +---+
+           O   |
+          /|   |
+               |
+               |
+              ===
+        """,
+        """
+           +---+
+           O   |
+          /|\  |
+               |
+               |
+              ===
+        """,
+        """
+           +---+
+           O   |
+          /|\  |
+          /    |
+               |
+              ===
+        """,
+        """
+           +---+
+           O   |
+          /|\  |
+          / \  |
+               |
+              ===
+        """
+        ]
+    
+        return dibujo[intentos]
 
+def ahorcado():
+    #os.system("cls")
+    #print(f"Hola, vamos a jugar al juego del Ahorcado. \n \nLa palabra escondida sera una palabra aleatoria.\n \nTienes {max_fallos} intentos!! \n\n¡Comencemos!")
+    
+   # input("\nPresiona Enter para comenzar...")
+    #os.system("cls")
+    
+    original, escondida = crear_cadenas()
+    fallos = 0
+    while escondida != original and fallos < max_fallos:
+       # os.system("cls")
+       # print(f"Palabra: {original}")
+       # print(f"Palabra: {escondida}")
+        
+       # s = input("\n¿Qué letra vas a elegir?\n\n")
+        
+               
+        s = s.upper()  # Convierte la letra ingresada a mayúscula
+        if s[0] == original[0].upper():
+            
+            escondida = reemplazar_simbolo(original, escondida, s)
+           # print("\n¡Bien hecho! Esa letra es parte de la palabra.")
+        else: 
+            
+            s=s.lower()    
+            if s in original:
+                
+                escondida = reemplazar_simbolo(original, escondida, s)
+              #  print("\n¡Bien hecho! Esa letra es parte de la palabra.")
+            else:
+                fallos += 1
+                
+                dibujo_muñeco = crear_muñeco_ahorcado(fallos-1)
+                print(dibujo_muñeco)
+               # print(f"\nEsa letra no es parte de la palabra. Te quedan {max_fallos - fallos} intentos!")
+            
+     #   input("\nPresione Enter para continuar...")
+        
+   # if escondida == original:
+       # os.system("cls")
+      #  print(f"\n¡Ganaste! La palabra es {escondida}.")
+  #  else:
+       # os.system("cls")
+       # print(f"\n¡Perdiste! La palabra era {original}.")
+        
+   # print("\nGracias por jugar.\n")
             
 if __name__ == '__main__':
     juego = Ahorcado() 

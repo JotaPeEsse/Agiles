@@ -7,7 +7,6 @@ cov = coverage.Coverage()
 cov.start()
 
 
-
          
 class TestIngresarPalabra(unittest.TestCase):
     def test_ingreso_de_palabra(self):
@@ -81,7 +80,7 @@ class TestVerificarDerrota(unittest.TestCase):
     def test_verificar_derrota(self):
         juego = Ahorcado()
         juego.max_fallos
-        fallos = 7
+        fallos = 6
         self.assertTrue(juego.verificar_derrota(fallos))
 
 class TestVerificacionLetraIncorrecta(unittest.TestCase):
@@ -91,6 +90,22 @@ class TestVerificacionLetraIncorrecta(unittest.TestCase):
         letra_ingresada = "A"
         fallo = juego.adivinar_letra(palabra_correcta, letra_ingresada)
         self.assertEqual(fallo, 1)
+
+class TestVereficarRepeticionLetra(unittest.TestCase):
+    def test_verificar_repeticion_letra(self):
+        juego = Ahorcado()
+        letra = 'e'
+        letras_ingresadas = ['a', 'b', 'e', 'e']
+        result = juego.verificar_repeticion_letra(letra, letras_ingresadas)
+        self.assertTrue(result)
+
+class TestVereficarNoRepeticionLetra(unittest.TestCase):       
+    def test_verificar_no_repeticion_letra(self):
+        juego = Ahorcado()
+        letra = 'e'
+        letras_ingresadas = ['a', 'b', 'c']
+        result = juego.verificar_repeticion_letra(letra, letras_ingresadas)
+        self.assertFalse(result)
 
 cov.stop()
 cov.save()

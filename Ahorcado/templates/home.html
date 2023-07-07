@@ -1,0 +1,115 @@
+{% extends "base.html"%}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        /* Estilos personalizados */
+        .centered {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .centered-button {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    {% block content %}
+    <div class="centered">
+        <div>
+            <br>
+            <br>
+            <h3 style="text-align: center;">¿Sabes cómo se Juega? Te recordamos las Instrucciones...</h3>
+            <br>
+            
+            <div class="d-flex justify-content-center align-items-center">
+                <style>
+                    .list-container {
+                        border: 5px solid #f90000;
+                        padding: 20px;
+                        border-radius: 10px;
+                        margin-right: -150px; /* Ajusta el margen derecho */
+                    }
+                    
+                    .hangman {
+                        margin-left: -150px; /* Ajusta el margen izquierdo */
+                    }
+                </style>
+            
+                <div class="list-container">
+                    <ul>
+                        <li>aaaa</li>
+                        <br>
+                        <li>bbbb</li>
+                        <br>
+                        <li>Podes escribir de a <b>UNA</b> letra a la vez.</li>
+                        <br>
+                        <li><b>Gana</b> el que <b>descubre</b> la palabra.</li>
+                        <br>
+                        <li>La palabra a descubrir es una palabra <b>Aleatoria.</b></li>
+                        <br>
+                        <li><b>Recordá:</b> Tenés solo <b>7</b> intentos.</li>
+                    </ul>
+                </div>
+            
+                <h2 class="hangman">
+                    <pre>
+                        <strong>
+                            +---+
+                            |   |
+                            O   |
+                           /|\  |
+                           / \  |
+                                |
+                           =======
+                        </strong>
+                    </pre>
+                </h2>
+            </div>
+            
+            
+            
+            <br>
+           
+            <h3 style="text-align: center;">Exitos.</h3>
+            <h3 style="text-align: center;">
+                <span style="display: inline-block; transform: rotate(90deg);">:)</span>
+            </h3>
+            
+    
+           
+        
+            <center>
+            
+                <button type="button" onclick="redirigir()" class="btn btn-success btn-custom" >Jugar</button>
+
+                <script>
+                    function redirigir() {
+                        window.location.href = "{{ url_for('juego') }}";
+                    }
+                </script>
+
+                <style>
+                    .btn-custom {
+                        width: 50%;
+                        transition: background-color 0.3s ease;
+                    }
+
+                    .btn-custom:hover {
+                        background-color: #28a745;
+                        color: #fff;
+                    }
+                </style>
+
+            </center>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html>
