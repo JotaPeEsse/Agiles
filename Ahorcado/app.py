@@ -9,13 +9,13 @@ app.secret_key = 'clave_secreta'
 
 max_fallos = 6
 
-palabras = ['Gato', 'Perro', 'Lapiz', 'Computadora', 'Felicidad', 
-            'Jardin', 'Avion', 'Pelota', 'Libro', 'Montaña', 'Cafe', 'Sol', 'Luna', 
-            'Rana', 'Chocolate', 'Musica', 'Playa', 'Nube', 'Puerta', 'Risa']
+palabras = ['Gato', 'Computadora', 'Felicidad', 
+            'Jardin','Pelota', 'Montaña', 'Cafe', 'Luna', 
+            'Rana',  'Musica', 'Playa', 'Puerta', 'Risa']
 
 def crear_cadenas():
-    #palabra = random.choice(palabras)
-    palabra = "Gato"
+    palabra = random.choice(palabras)
+    #palabra = "Gato"
     palabra_escondida = '_'*len(palabra)
     return palabra, palabra_escondida
 

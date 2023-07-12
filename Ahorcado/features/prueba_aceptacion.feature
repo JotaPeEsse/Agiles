@@ -1,36 +1,40 @@
 Feature: Juego del Ahorcado
+    Como jugador
+    Quiero jugar al juego del ahorcado
+    Para adivinar la palabra oculta
 
-  Scenario: Comienzo del juego
-    Given que estoy en la página principal
-    When el usuario hace clic en el botón "Jugar"
-    Then se muestra la página del juego
+Scenario: Iniciar el juego
+    Given que estoy en la página de inicio
+    When hago clic en el botón "Jugar"
+    Then debería ser redirigido a la página del juego
+    And debería ver una palabra oculta en forma de guiones bajos
+    And debería ver el dibujo del muñeco del ahorcado vacío
+    And debería ver el número de intentos restantes
 
-  Scenario: Ingresar una letra válida
-    Given que estoy en la página del juego
+Scenario: Adivinar una letra correcta
     When ingreso la letra "a"
-    Then la letra "a" se muestra en el tablero
+    Then debería ver la letra "a" en la palabra oculta
+    And el dibujo del muñeco del ahorcado debería seguir vacío
+    And el número de intentos restantes debería mantenerse
 
-  Scenario: Ingresar una letra inválida
-    Given estoy en la página del juego
-    And el contador de intentos está en 6
-    When si ingreso la letra "x"
-    Then la letra "x" no se muestra en el tablero
+Scenario: Adivinar una letra incorrecta
+    Given el contador de intentos está en 6
+    When ingreso letra "z"
+    Then debería ver el dibujo del muñeco del ahorcado con una parte dibujada
     And el contador de intentos disminuye en 1
 
-  Scenario: Ganar el juego
-    Given página del juego
-    When ingreso primer letra "g"
-    When ingreso segunda letra "a"
-    When ingreso tercer letra "t"
-    When ingreso cuarta letra "o"
-    Then se muestra un mensaje de victoria
+Scenario: Ganar el juego
+    When adivino correctamente todas las letras de la palabra oculta
+    Then debería ver todas las letras correctas en la palabra oculta
+    And el dibujo del muñeco del ahorcado debería estar en su estado inicial
+    And el número de intentos debería mantenerse
+    And debería ver el mensaje "¡Ganaste!"
+
     
-  Scenario: Perder el juego
+Scenario: Perder el juego
     Given apreto el botón de jugar de nuevo
-    When ingreso la letra primera "b"
-    When ingreso la letra segunda "h"
-    When ingreso la letra tercera "f"
-    When ingreso la letra cuarta "s"
-    When ingreso la letra quinta "q"
-    When ingreso la letra sexta "r"
-    Then se muestra un mensaje de derrota
+    When adivino incorrectamente todas las letras de la palabra oculta
+    Then debería ver el dibujo completo del muñeco del ahorcado
+    And el número de intentos restantes debería llegar a cero
+    And debería ver el mensaje "¡Perdiste!"
+    
