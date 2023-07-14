@@ -172,6 +172,7 @@ def step_adivino_correctamente(context):
     for letra in palabra_oculta:
         if letra not in letras_adivinadas:
             ingresar_letra(letra)
+            time.sleep(2)  
             letras_adivinadas.add(letra)
 
 def ingresar_letra(letra):
@@ -237,6 +238,7 @@ def step_adivino_incorrectamente(context):
     letras = ['x'] * 6
     
     for letra in letras:
+            time.sleep(2)  
             ingresar_letra_incorrecta(letra)
             
 
