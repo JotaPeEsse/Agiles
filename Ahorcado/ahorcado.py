@@ -88,7 +88,7 @@ class Ahorcado:
         else:
             return 1
     
-    def crear_muñeco_ahorcado(intentos):
+    def crear_muñeco_ahorcado(self, intentos):
         dibujo = [
         """
            +---+

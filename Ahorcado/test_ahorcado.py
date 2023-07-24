@@ -113,6 +113,13 @@ class TestCrearCadenasOcultas(unittest.TestCase):
         palabra, palabra_escondida = juego.crear_cadenas()
         self.assertTrue(all(c == '_' for c in palabra_escondida))
 
+class TestCrearMuñecoAhorcado(unittest.TestCase):
+    def test_crear_muñeco_ahorcado(self):
+        for intentos in range(7):
+            juego = Ahorcado()
+            dibujo_esperado = juego.crear_muñeco_ahorcado(intentos)
+            self.assertEqual(dibujo_esperado.strip(), juego.crear_muñeco_ahorcado(intentos).strip())
+
 cov.stop()
 cov.save()
 
