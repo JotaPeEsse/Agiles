@@ -150,52 +150,6 @@ class Ahorcado:
     
         return dibujo[intentos]
 
-def ahorcado():
-    #os.system("cls")
-    #print(f"Hola, vamos a jugar al juego del Ahorcado. \n \nLa palabra escondida sera una palabra aleatoria.\n \nTienes {max_fallos} intentos!! \n\n¡Comencemos!")
-    
-   # input("\nPresiona Enter para comenzar...")
-    #os.system("cls")
-    
-    original, escondida = crear_cadenas()
-    fallos = 0
-    while escondida != original and fallos < max_fallos:
-       # os.system("cls")
-       # print(f"Palabra: {original}")
-       # print(f"Palabra: {escondida}")
-        
-       # s = input("\n¿Qué letra vas a elegir?\n\n")
-        
-               
-        s = s.upper()  # Convierte la letra ingresada a mayúscula
-        if s[0] == original[0].upper():
-            
-            escondida = reemplazar_simbolo(original, escondida, s)
-           # print("\n¡Bien hecho! Esa letra es parte de la palabra.")
-        else: 
-            
-            s=s.lower()    
-            if s in original:
-                
-                escondida = reemplazar_simbolo(original, escondida, s)
-              #  print("\n¡Bien hecho! Esa letra es parte de la palabra.")
-            else:
-                fallos += 1
-                
-                dibujo_muñeco = crear_muñeco_ahorcado(fallos-1)
-                print(dibujo_muñeco)
-               # print(f"\nEsa letra no es parte de la palabra. Te quedan {max_fallos - fallos} intentos!")
-            
-     #   input("\nPresione Enter para continuar...")
-        
-   # if escondida == original:
-       # os.system("cls")
-      #  print(f"\n¡Ganaste! La palabra es {escondida}.")
-  #  else:
-       # os.system("cls")
-       # print(f"\n¡Perdiste! La palabra era {original}.")
-        
-   # print("\nGracias por jugar.\n")
             
 if __name__ == '__main__':
     juego = Ahorcado() 
