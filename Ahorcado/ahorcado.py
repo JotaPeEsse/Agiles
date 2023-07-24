@@ -13,7 +13,7 @@ class Ahorcado:
     def verificar_repeticion_letra(self, letra, letras_ingresadas):
         return letras_ingresadas.count(letra) >= 2
 
-    def crear_cadenas():
+    def crear_cadenas(self):
         palabra = random.choice(palabras)
         palabra_escondida = '_'*len(palabra)
         return palabra, palabra_escondida
