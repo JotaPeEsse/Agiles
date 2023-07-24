@@ -18,15 +18,6 @@ class Ahorcado:
         palabra_escondida = '_'*len(palabra)
         return palabra, palabra_escondida
 
-    def ingresar_palabra():
-        palabra = []
-        while True:
-            letra = input()
-            if not letra:
-                break
-            if letra.isalpha:
-                palabra.append(letra)
-
     def validar_letras(self, letras):
         if not letras.isalpha():
             return False
