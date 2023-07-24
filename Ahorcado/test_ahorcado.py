@@ -50,7 +50,7 @@ class TestPalabraGanadora(unittest.TestCase):
         juego = Ahorcado()
         palabra = "Juego"
         palabra_correcta = "Juego"
-        self.assertEqual(juego.palabra_ganadora(palabra, palabra_correcta))
+        self.assertTrue(juego.palabra_ganadora(palabra, palabra_correcta))
 
 
 class TestIntentosRestantes(unittest.TestCase):
@@ -74,7 +74,7 @@ class TestLetraIncorrecta(unittest.TestCase):
         juego = Ahorcado()
         letra_ingresada = "A"
         palabra_correcta = ["T","E","S","T"]
-        self.assertFalse(juego.letra_ganadora(letra_ingresada, palabra))
+        self.assertFalse(juego.letra_ganadora(letra_ingresada, palabra_correcta))
 
 class TestVerificarDerrota(unittest.TestCase):
     def test_verificar_derrota(self):
