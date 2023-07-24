@@ -37,13 +37,19 @@ class Ahorcado:
     def intentos_palabra(self, intentos):
         if intentos >= 6:
             return False
-        return True      
-    
-    def letra_ingresada(self, letra):
-        return letra
+        return True 
 
-    def palabra_ganadora(self, palabra):
-        return palabra
+    def letra_ganadora(self, letra, palabra):
+        if letra in palabra:
+            return True
+        else:
+            return False
+    
+    def palabra_ganadora(self, palabra, palabra_correcta):
+        if palabra == palabra_correcta:
+            return True
+        else:
+            return False
 
     def palabra_ingresada(self, palabra):
         return palabra
@@ -66,8 +72,11 @@ class Ahorcado:
         intentos_restantes = max_fallos - fallos
         return intentos_restantes
     
-    def letras_ingresadas(self, letras):
-        return letras
+    def letras_ingresadas(self, letra_ingresada, letras_utilizadas):
+        if letra_ingresada in letras_utilizadas:
+            return True
+        else:
+            return False
         
         
     def verificar_derrota(self,fallos):

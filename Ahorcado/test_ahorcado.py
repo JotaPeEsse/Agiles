@@ -33,9 +33,9 @@ class TestPalabraOculta(unittest.TestCase):
 class TestLetraValida(unittest.TestCase):
     def test_palabra_valida(self):
         juego = Ahorcado()
-        letra = juego.letra_ingresada("E")
-        palabra = juego.palabra_ganadora(["T","E","S","T"])
-        self.assertTrue(letra in palabra)
+        letra = juego.validar_letras("E")
+        palabra = ["T","E","S","T"]
+        self.assertTrue(juego.letra_ganadora(letra, palabra))
         
 class TestPalabraAleatoria(unittest.TestCase):
     def test_palabra_aleatoria(self):
@@ -48,9 +48,9 @@ class TestPalabraAleatoria(unittest.TestCase):
 class TestPalabraGanadora(unittest.TestCase):
     def test_palabra_ganadora(self):
         juego = Ahorcado()
-        palabra = juego.palabra_ingresada("Juego")
-        palabra_correcta = juego.palabra_ganadora("Juego")
-        self.assertEqual(palabra, palabra_correcta)
+        palabra = juego.validar_letras("Juego")
+        palabra_correcta = "Juego"
+        self.assertEqual(juego.palabra_ganadora(palabra, palabra_correcta))
 
 
 class TestIntentosRestantes(unittest.TestCase):
@@ -65,16 +65,16 @@ class TestIntentosRestantes(unittest.TestCase):
 class TestLetrasIngresadas(unittest.TestCase):
     def test_letras_ingresadas(self):
         juego = Ahorcado()
-        letra_ingresada = juego.letra_ingresada("E")
-        letras_ingresadas = juego.letras_ingresadas(["A","E","K","W","Ñ"])
-        self.assertTrue(letra_ingresada in letras_ingresadas)
+        letra_ingresada = juego.validar_letras("E")
+        letras_utilizadas = ["A","E","K","W","Ñ"]
+        self.assertTrue(juego.letras_ingresadas(letra_ingresada, letras_utilizadas))
 
 class TestLetraIncorrecta(unittest.TestCase):
     def test_letra_incorrecta(self):
         juego = Ahorcado()
-        letra_ingresada = juego.letra_ingresada("A")
-        palabra_correcta = juego.palabra_ganadora(["T","E","S","T"])
-        self.assertFalse(letra_ingresada in palabra_correcta)
+        letra_ingresada = juego.validar_letras("A")
+        palabra_correcta = ["T","E","S","T"]
+        self.assertFalse(juego.letra_ganadora(letra, palabra))
 
 class TestVerificarDerrota(unittest.TestCase):
     def test_verificar_derrota(self):
@@ -106,6 +106,12 @@ class TestVereficarNoRepeticionLetra(unittest.TestCase):
         letras_ingresadas = ['a', 'b', 'c']
         result = juego.verificar_repeticion_letra(letra, letras_ingresadas)
         self.assertFalse(result)
+
+class TestCrearCadenasOcultas(unittest.TestCase):
+    def test_crear_cadenas(self):
+        palabra, palabra_escondida = crear_cadenas()
+
+        self.assertTrue(all(c == '_' for c in palabra_escondida))
 
 cov.stop()
 cov.save()
