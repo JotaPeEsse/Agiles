@@ -19,12 +19,23 @@ jobs:
         python-version: 3.9
 
     - name: Install dependencies
-      run: python -m pip install pytest 
-           pip install coverage
-      
+      run: |
+        python -m pip install pytest
+        python -m pip install coverage
 
-    - name: Run unit tests
-      run: pytest -v
+    - name: Run tests with coverage
+      env:
+        COVERAGE_FILE: ${{ github.workspace }}/coverage/.coverage
+      run: |
+        coverage run -m pytest
+        coverage xml -o coverage.xml
+
+        mkdir -p coverage
+        cp coverage.xml coverage/coverage.xml
+
+        coverage report
+
+
 
 
 
