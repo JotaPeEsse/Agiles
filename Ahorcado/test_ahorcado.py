@@ -56,10 +56,9 @@ class TestPalabraGanadora(unittest.TestCase):
 class TestIntentosRestantes(unittest.TestCase):
     def test_contar_intentos_restantes(self):
         juego = Ahorcado()
-        juego.max_fallos
         fallos = 3
-        intentos_restantes = juego.contar_cantidad_intentos_restantes(juego.max_fallos, fallos)
-        self.assertEqual(intentos_restantes, 3)
+        intentos_restantes = juego.contar_cantidad_intentos_restantes(fallos)
+        self.assertEqual(intentos_restantes, Ahorcado.max_fallos - fallos)
         
         
 class TestLetrasIngresadas(unittest.TestCase):
