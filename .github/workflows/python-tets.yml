@@ -26,7 +26,7 @@ jobs:
           python -m pip install behave selenium pytest coverage
 
       - name: Run Behave tests
-        run: behave test_behave.py
+        run: behave test.py
 
       - name: Run unit tests with coverage
         env:
