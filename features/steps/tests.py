@@ -8,36 +8,15 @@ import subprocess
 import time
 from behave import __main__ as behave_executable
 import sys
-from bs4 import BeautifulSoup
-
-
-
-# Configuración de Selenium
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
-
-def ingresar_letra(letra):
-    input_field = wait.until(EC.presence_of_element_located((By.NAME, 'letra')))
-    input_field.send_keys(letra)
-    input_field.send_keys(Keys.RETURN)
-
-# Ruta al ejecutable del driver de Brave
-brave_driver_path = 'C:\\Users\\PC\\Desktop\\Facultad\\5to\\Metodologia\\Agiles\\Ahorcado\\chromedriver.exe'  # C:\\Users\\juanp\\OneDrive\\Desktop\\AhorcadoJP\\chromedriver.exe
 
 # Configuración del servicio del driver
-service = Service(brave_driver_path)
-
-# Opciones para el navegador Brave
 options = webdriver.ChromeOptions()
-options.binary_location = 'C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe'  # Reemplaza con la ruta correcta al ejecutable de Brave
 options.add_argument("--start-maximized")
 
-# Inicialización del driver de Brave
-driver = webdriver.Chrome(service=service, options=options)
+# Inicialización del driver de Chrome
+driver = webdriver.Chrome(options=options)
 driver.implicitly_wait(10)
 wait = WebDriverWait(driver, 10)
-
 
 if __name__ == '__main__':
     subprocess.Popen(['python', 'run.py'])
