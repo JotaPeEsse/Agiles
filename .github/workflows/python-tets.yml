@@ -36,7 +36,7 @@ jobs:
 
         coverage report
 
-        behave Agiles\Ahorcado\features\steps\tests.py
+        behave features
 
 
 
