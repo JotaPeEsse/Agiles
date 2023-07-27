@@ -9,8 +9,13 @@ import time
 from behave import __main__ as behave_executable
 import sys
 from bs4 import BeautifulSoup
-import chromedriver_binary
+import os
 
+
+def ingresar_letra(letra):
+    input_field = wait.until(EC.presence_of_element_located((By.NAME, 'letra')))
+    input_field.send_keys(letra)
+    input_field.send_keys(Keys.RETURN)
 
 
 # Configuración de Selenium
@@ -18,23 +23,17 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
-def ingresar_letra(letra):
-    input_field = wait.until(EC.presence_of_element_located((By.NAME, 'letra')))
-    input_field.send_keys(letra)
-    input_field.send_keys(Keys.RETURN)
-
 # Ruta al ejecutable del driver de Brave
-brave_driver_path = 'C:\\Users\\PC\\Desktop\\Facultad\\5to\\Metodologia\\Agiles\\Ahorcado\\chromedriver.exe'  # C:\\Users\\juanp\\OneDrive\\Desktop\\AhorcadoJP\\chromedriver.exe
+chrome_driver_path = os.path.join(os.environ['GITHUB_WORKSPACE'], 'drivers', 'chromedriver')
 
 # Configuración del servicio del driver
-service = Service(brave_driver_path)
+service = Service(chrome_driver_path)
 
 # Opciones para el navegador Brave
 options = webdriver.ChromeOptions()
-options.binary_location = 'C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe'  # Reemplaza con la ruta correcta al ejecutable de Brave
-options.add_argument("--start-maximized")
+options.binary_location = 'C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe'
 
-# Inicialización del driver de Brave
+# Inicialización del driver de Chrome
 driver = webdriver.Chrome(service=service, options=options)
 driver.implicitly_wait(10)
 wait = WebDriverWait(driver, 10)
@@ -43,12 +42,12 @@ wait = WebDriverWait(driver, 10)
 if __name__ == '__main__':
     subprocess.Popen(['python', 'run.py'])
     behave_executable.main(['-k', 'features/prueba_aceptacion.feature'])
-    
-    
-    
+
+
 @given('que estoy en la página de inicio')
 def step_estoy_en_pagina_inicio(context):
     driver.get('http://localhost:5000/')
+
 
 @when('hago clic en el botón "{button_text}"')
 def step_hago_clic_en_jugar(context, button_text):
@@ -66,7 +65,7 @@ def step_hago_clic_en_jugar(context, button_text):
 @then('debería ser redirigido a la página del juego')
 def step_deberia_ser_redirigido(context):
     time.sleep(2)
-    assert '/juego' in driver.current_url
+    assert '/juego' in driver.current_urlS
 
 @then('debería ver una palabra oculta en forma de guiones bajos')
 def step_deberia_ver_palabra_oculta(context):
