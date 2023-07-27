@@ -79,7 +79,6 @@ class TestLetraIncorrecta(unittest.TestCase):
 class TestVerificarDerrota(unittest.TestCase):
     def test_verificar_derrota(self):
         juego = Ahorcado()
-        juego.max_fallos
         fallos = 6
         self.assertTrue(juego.verificar_derrota(fallos))
 
