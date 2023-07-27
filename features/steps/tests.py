@@ -23,15 +23,15 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
-# Ruta al ejecutable del driver de Brave
+# Ruta al ejecutable del driver de Chrome
 chrome_driver_path = os.path.join(os.environ['GITHUB_WORKSPACE'], 'drivers', 'chromedriver')
 
 # Configuración del servicio del driver
 service = Service(chrome_driver_path)
 
-# Opciones para el navegador Brave
+# Opciones para el navegador Chrome
 options = webdriver.ChromeOptions()
-options.binary_location = 'C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe'
+options.add_argument("--start-maximized")
 
 # Inicialización del driver de Chrome
 driver = webdriver.Chrome(service=service, options=options)
