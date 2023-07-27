@@ -30,7 +30,7 @@ jobs:
     - name: Get Brave version
       id: brave_version
       run: |
-        BRAVE_VERSION=$(braveversion)
+        BRAVE_VERSION=$(strings /usr/bin/brave-browser | grep "Version=" | head -n 1 | awk -F'=' '{print $2}')
         echo "Brave version: $BRAVE_VERSION"
         echo "::set-output name=version::$BRAVE_VERSION"
 
