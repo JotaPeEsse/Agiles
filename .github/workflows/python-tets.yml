@@ -36,11 +36,13 @@ jobs:
 
     - name: Set up Chrome driver
       run: |
-        mkdir -p ${{ github.workspace }}/drivers
-        VERSION=${{ steps.brave_version.outputs.version }}
-        wget -q -O ${{ github.workspace }}/drivers/chromedriver.zip "https://chromedriver.storage.googleapis.com/${VERSION}/chromedriver_linux64.zip"
-        unzip -q ${{ github.workspace }}/drivers/chromedriver.zip -d ${{ github.workspace }}/drivers
-        chmod +x ${{ github.workspace }}/drivers/chromedriver
+        if [ ! -d "/home/runner/work/Agiles/Agiles/drivers" ]; then
+          mkdir -p /home/runner/work/Agiles/Agiles/drivers
+          VERSION=${{ steps.brave_version.outputs.version }}
+          wget -q -O /home/runner/work/Agiles/Agiles/drivers/chromedriver.zip "https://chromedriver.storage.googleapis.com/${VERSION}/chromedriver_linux64.zip"
+          unzip -q /home/runner/work/Agiles/Agiles/drivers/chromedriver.zip -d /home/runner/work/Agiles/Agiles/drivers
+          chmod +x /home/runner/work/Agiles/Agiles/drivers/chromedriver
+        fi
 
     - name: Run tests with coverage and Behave
       env:
@@ -52,10 +54,8 @@ jobs:
         mkdir -p ${{ github.workspace }}/coverage
         cp ${{ github.workspace }}/coverage.xml ${{ github.workspace }}/coverage/coverage.xml
 
-        ${{ github.workspace }}/drivers/chromedriver --version  # Para asegurarte de que el controlador esté en la ruta correcta
+        /home/runner/work/Agiles/Agiles/drivers/chromedriver --version  # Para asegurarte de que el controlador esté en la ruta correcta
         behave features
-
-
 
 
 
