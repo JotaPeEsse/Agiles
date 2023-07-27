@@ -23,10 +23,12 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 
 # Ruta al ejecutable del driver de Chrome
-brave_driver_path = 'C:\\Users\\PC\\Desktop\\Facultad\\5to\\Metodologia\\Agiles\\chromedriver.exe'
+chrome_driver_path = 'C:\\Users\\PC\\Desktop\\Facultad\\5to\\Metodologia\\Agiles\\chromedriver.exe'
+
 
 # Configuración del servicio del driver
 service = Service(chrome_driver_path)
+
 
 # Opciones para el navegador Chrome
 options = Options()
