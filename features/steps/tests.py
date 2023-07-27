@@ -18,25 +18,25 @@ def ingresar_letra(letra):
     input_field.send_keys(Keys.RETURN)
 
 
-# Configuración de Selenium
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
 
 # Ruta al ejecutable del driver de Chrome
-chrome_driver_path = os.path.join(os.environ['GITHUB_WORKSPACE'], 'drivers', 'chromedriver')
+chrome_driver_path = r'C:\Users\PC\miniconda3\Lib\site-packages\chromedriver_binary\chromedriver.exe'
 
 # Configuración del servicio del driver
 service = Service(chrome_driver_path)
 
 # Opciones para el navegador Chrome
-options = webdriver.ChromeOptions()
+options = Options()
 options.add_argument("--start-maximized")
 
 # Inicialización del driver de Chrome
 driver = webdriver.Chrome(service=service, options=options)
 driver.implicitly_wait(10)
 wait = WebDriverWait(driver, 10)
+
 
 
 if __name__ == '__main__':
