@@ -36,7 +36,9 @@ jobs:
 
     - name: Set up Chrome driver
       run: |
-        mkdir -p drivers
+        if [ ! -d "drivers" ]; then
+          mkdir drivers
+        fi
         VERSION=${{ steps.brave_version.outputs.version }}
         wget -q -O drivers/chromedriver.zip "https://chromedriver.storage.googleapis.com/${VERSION}/chromedriver_linux64.zip"
         unzip -q drivers/chromedriver.zip -d drivers
