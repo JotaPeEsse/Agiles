@@ -27,13 +27,13 @@ jobs:
         python -m pip install beautifulsoup4
         python -m pip install selenium
 
-    - name: Set up Chrome driver
+    - name: Set up Brave driver
       run: |
         mkdir -p drivers
+        # Reemplaza la URL con el enlace de descarga del controlador compatible con tu versión de Brave
         wget -q -O drivers/chromedriver.zip https://chromedriver.storage.googleapis.com/94.0.4606.61/chromedriver_linux64.zip
         unzip -q drivers/chromedriver.zip -d drivers
         chmod +x drivers/chromedriver
-        sudo mv drivers/chromedriver /usr/bin/chromedriver
 
     - name: Run tests with coverage and Behave
       env:
@@ -45,7 +45,7 @@ jobs:
         mkdir -p coverage
         cp coverage.xml coverage/coverage.xml
 
-        /usr/bin/chromedriver --version  # Para asegurarte de que el controlador esté en la ruta correcta
+        drivers/chromedriver --version  # Para asegurarte de que el controlador esté en la ruta correcta
         behave features
 
 
