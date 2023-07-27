@@ -34,7 +34,7 @@ jobs:
         mkdir -p coverage
         cp coverage.xml coverage/coverage.xml
 
-        behave Ahorcado\features
+        behave features
 
 
 
