@@ -17,11 +17,13 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
-
-# Resto de las pruebas...
+def ingresar_letra(letra):
+    input_field = wait.until(EC.presence_of_element_located((By.NAME, 'letra')))
+    input_field.send_keys(letra)
+    input_field.send_keys(Keys.RETURN)
 
 # Ruta al ejecutable del driver de Brave
-brave_driver_path = 'C:\\Users\\juanp\\OneDrive\\Desktop\\AhorcadoJP\\chromedriver.exe'  # Reemplaza con la ruta correcta al ejecutable del driver de Brave
+brave_driver_path = 'C:\\Users\\PC\\Desktop\\Facultad\\5to\\Metodologia\\Agiles\\Ahorcado\\chromedriver.exe'  # C:\\Users\\juanp\\OneDrive\\Desktop\\AhorcadoJP\\chromedriver.exe
 
 # Configuración del servicio del driver
 service = Service(brave_driver_path)
@@ -39,7 +41,6 @@ wait = WebDriverWait(driver, 10)
 
 if __name__ == '__main__':
     subprocess.Popen(['python', 'run.py'])
-    
     behave_executable.main(['-k', 'features/prueba_aceptacion.feature'])
     
     
