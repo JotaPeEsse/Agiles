@@ -36,7 +36,7 @@ jobs:
 
         coverage report
 
-        behave prueba_aceptacion.feature
+        behave features
 
 
 
