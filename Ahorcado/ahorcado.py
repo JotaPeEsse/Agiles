@@ -1,11 +1,5 @@
 import random
 
-max_fallos = 6
-
-palabras = ['Gato', 'Perro', 'Lapiz', 'Computadora', 'Felicidad', 
-            'Jardin', 'Avion', 'Pelota', 'Libro', 'Montaña', 'Cafe', 'Sol', 'Luna', 
-            'Rana', 'Chocolate', 'Musica', 'Playa', 'Nube', 'Puerta', 'Risa']
-
 class Ahorcado:
     
     max_fallos = 6
