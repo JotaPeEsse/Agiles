@@ -34,8 +34,6 @@ jobs:
         mkdir -p coverage
         cp coverage.xml coverage/coverage.xml
 
-        coverage report
-
         behave features
 
 
