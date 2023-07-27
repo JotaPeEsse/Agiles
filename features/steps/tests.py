@@ -33,7 +33,6 @@ options = webdriver.ChromeOptions()
 options.binary_location = 'C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe'  # Reemplaza con la ruta correcta al ejecutable de Brave
 options.add_argument("--start-maximized")
 
-
 # Inicialización del driver de Brave
 driver = webdriver.Chrome(service=service, options=options)
 driver.implicitly_wait(10)
