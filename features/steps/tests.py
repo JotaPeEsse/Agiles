@@ -9,6 +9,7 @@ import time
 from behave import __main__ as behave_executable
 import sys
 from bs4 import BeautifulSoup
+import chromedriver_binary
 
 
 

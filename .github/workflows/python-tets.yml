@@ -26,6 +26,7 @@ jobs:
         python -m pip install behave
         python -m pip install beautifulsoup4
         python -m pip install selenium
+        python -m pip install chromedriver-binary-auto
 
     - name: Set up Brave driver
       run: |
