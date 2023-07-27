@@ -20,21 +20,15 @@ class Ahorcado:
         return True
 
     def intentos_palabra(self, intentos):
-        if intentos >= 6:
+        if intentos >= Ahorcado.max_fallos:
             return False
         return True
 
     def letra_ganadora(self, letra, palabra):
-        if letra in palabra:
-            return True
-        else:
-            return False
+        return letra in palabra
 
     def palabra_ganadora(self, palabra, palabra_correcta):
-        if palabra == palabra_correcta:
-            return True
-        else:
-            return False
+        return palabra == palabra_correcta
 
     def palabra_ingresada(self, palabra):
         return palabra
@@ -54,23 +48,17 @@ class Ahorcado:
         return palabra
 
     def contar_cantidad_intentos_restantes(self, fallos):
-        intentos_restantes = self.max_fallos - fallos
+        intentos_restantes = Ahorcado.max_fallos - fallos
         return intentos_restantes
 
     def letras_ingresadas(self, letra_ingresada, letras_utilizadas):
-        if letra_ingresada in letras_utilizadas:
-            return True
-        else:
-            return False
+        return letra_ingresada in letras_utilizadas
 
     def verificar_derrota(self, fallos):
-        return (self.max_fallos == fallos)
+        return Ahorcado.max_fallos == fallos
 
     def adivinar_letra(self, palabra, letra):
-        if letra in palabra:
-            return 0
-        else:
-            return 1
+        return 0 if letra in palabra else 1
 
     def crear_muñeco_ahorcado(self, intentos):
         dibujo = [
@@ -136,4 +124,5 @@ class Ahorcado:
 
 if __name__ == '__main__':
     juego = Ahorcado()
+
 
