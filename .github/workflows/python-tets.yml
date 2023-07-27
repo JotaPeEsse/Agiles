@@ -24,7 +24,7 @@ jobs:
         python -m pip install coverage
         python -m pip install behave
         python -m pip install selenium
-        python -m pip install bs4
+        python -m pip install beautifulsoup4
 
     - name: Run tests with coverage and Behave
       env:
