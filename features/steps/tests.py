@@ -38,6 +38,7 @@ driver = webdriver.Chrome(service=service, options=options)
 driver.implicitly_wait(10)
 wait = WebDriverWait(driver, 10)
 
+
 if __name__ == '__main__':
     subprocess.Popen(['python', 'run.py'])
     behave_executable.main(['-k', 'features/prueba_aceptacion.feature'])
