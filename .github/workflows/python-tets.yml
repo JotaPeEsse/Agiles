@@ -27,6 +27,13 @@ jobs:
         python -m pip install beautifulsoup4
         python -m pip install selenium
 
+    - name: Set up Chrome driver
+      run: |
+        mkdir -p drivers
+        wget -q -O drivers/chromedriver.zip https://chromedriver.storage.googleapis.com/94.0.4606.61/chromedriver_linux64.zip
+        unzip -q drivers/chromedriver.zip -d drivers
+        chmod +x drivers/chromedriver
+
     - name: Run tests with coverage and Behave
       env:
         COVERAGE_FILE: ${{ github.workspace }}/coverage/.coverage
@@ -37,7 +44,9 @@ jobs:
         mkdir -p coverage
         cp coverage.xml coverage/coverage.xml
 
+        drivers/chromedriver --version  # Para asegurarte de que el controlador esté en la ruta correcta
         behave features
+
 
 
 
