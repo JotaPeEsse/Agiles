@@ -26,13 +26,19 @@ jobs:
         python -m pip install behave
         python -m pip install beautifulsoup4
         python -m pip install selenium
-        python -m pip install chromedriver-binary-auto
 
-    - name: Set up Brave driver
+    - name: Get Brave version
+      id: brave_version
+      run: |
+        BRAVE_VERSION=$(braveversion)
+        echo "Brave version: $BRAVE_VERSION"
+        echo "::set-output name=version::$BRAVE_VERSION"
+
+    - name: Set up Chrome driver
       run: |
         mkdir -p drivers
-        # Reemplaza la URL con el enlace de descarga del controlador compatible con tu versión de Brave
-        wget -q -O drivers/chromedriver.zip https://chromedriver.storage.googleapis.com/94.0.4606.61/chromedriver_linux64.zip
+        VERSION=${{ steps.brave_version.outputs.version }}
+        wget -q -O drivers/chromedriver.zip "https://chromedriver.storage.googleapis.com/${VERSION}/chromedriver_linux64.zip"
         unzip -q drivers/chromedriver.zip -d drivers
         chmod +x drivers/chromedriver
 
