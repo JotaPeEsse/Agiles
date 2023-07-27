@@ -136,3 +136,4 @@ class Ahorcado:
 
 if __name__ == '__main__':
     juego = Ahorcado()
+
