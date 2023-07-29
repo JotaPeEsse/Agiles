@@ -7,7 +7,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - name: Checkout repository
@@ -29,24 +29,26 @@ jobs:
 
     - name: Set up Chrome driver
       run: |
-        mkdir -p ${{ github.workspace }}/drivers
+        mkdir -p "C:\Users\PC\Desktop\Facultad\5to\Metodologia\Agiles\Ahorcado\drivers"
         VERSION="95.0.4638.17"
-        wget -q -O ${{ github.workspace }}/drivers/chromedriver.zip "https://chromedriver.storage.googleapis.com/${VERSION}/chromedriver_linux64.zip"
-        unzip -q ${{ github.workspace }}/drivers/chromedriver.zip -d ${{ github.workspace }}/drivers
-        chmod +x ${{ github.workspace }}/drivers/chromedriver
+        wget -q -O "C:\Users\PC\Desktop\Facultad\5to\Metodologia\Agiles\Ahorcado\drivers\chromedriver.zip" "https://chromedriver.storage.googleapis.com/${VERSION}/chromedriver_win32.zip"
+        unzip -q "C:\Users\PC\Desktop\Facultad\5to\Metodologia\Agiles\Ahorcado\drivers\chromedriver.zip" -d "C:\Users\PC\Desktop\Facultad\5to\Metodologia\Agiles\Ahorcado\drivers"
+        chmod +x "C:\Users\PC\Desktop\Facultad\5to\Metodologia\Agiles\Ahorcado\drivers\chromedriver"
 
     - name: Verify Chrome driver version
       run: |
-        ${{ github.workspace }}/drivers/chromedriver --version  # Asegurarse de que el controlador esté en la ruta correcta y mostrar su versión
+        "C:\Users\PC\Desktop\Facultad\5to\Metodologia\Agiles\Ahorcado\drivers\chromedriver" --version
 
     - name: Run tests with coverage and Behave
-      env:
-        CHROME_DRIVER_PATH: ${{ github.workspace }}/drivers/chromedriver
-        BRAVE_EXECUTABLE_PATH: C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe
-        # Reemplaza esta ruta con la ruta correcta del ejecutable de Brave en Ubuntu
-        COVERAGE_FILE: ${{ github.workspace }}/coverage/.coverage
       run: |
-        python -m behave
+        coverage run -m pytest
+        coverage xml -o "C:\Users\PC\Desktop\Facultad\5to\Metodologia\Agiles\Ahorcado\coverage.xml"
+
+        mkdir -p "C:\Users\PC\Desktop\Facultad\5to\Metodologia\Agiles\Ahorcado\coverage"
+        cp "C:\Users\PC\Desktop\Facultad\5to\Metodologia\Agiles\Ahorcado\coverage.xml" "C:\Users\PC\Desktop\Facultad\5to\Metodologia\Agiles\Ahorcado\coverage\coverage.xml"
+
+        behave features
+
 
 
 
