@@ -30,27 +30,21 @@ jobs:
     - name: Set up Chrome driver
       run: |
         mkdir -p drivers
-        VERSION="95.0.4638.17"
-        if [ "$(uname)" = "Darwin" ]; then
-          wget -q -O drivers/chromedriver.zip "https://chromedriver.storage.googleapis.com/${VERSION}/chromedriver_mac64.zip"
-        else
-          wget -q -O drivers/chromedriver.zip "https://chromedriver.storage.googleapis.com/${VERSION}/chromedriver_linux64.zip"
-        fi
+        wget -q -O drivers/chromedriver.zip https://chromedriver.storage.googleapis.com/94.0.4606.61/chromedriver_linux64.zip
         unzip -q drivers/chromedriver.zip -d drivers
         chmod +x drivers/chromedriver
 
-    - name: Verify Chrome driver version
-      run: |
-        drivers/chromedriver --version  # Asegurarse de que el controlador esté en la ruta correcta y mostrar su versión
-
     - name: Run tests with coverage and Behave
+      env:
+        COVERAGE_FILE: ${{ github.workspace }}/coverage/.coverage
       run: |
         coverage run -m pytest
-        coverage xml -o ${{ github.workspace }}/coverage.xml
+        coverage xml -o coverage.xml
 
-        mkdir -p ${{ github.workspace }}/coverage
-        cp ${{ github.workspace }}/coverage.xml ${{ github.workspace }}/coverage/coverage.xml
+        mkdir -p coverage
+        cp coverage.xml coverage/coverage.xml
 
+        drivers/chromedriver --version  # Para asegurarte de que el controlador esté en la ruta correcta
         behave features
 
 
