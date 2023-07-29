@@ -4,21 +4,13 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import subprocess
 import time
-from behave import __main__ as behave_executable
-import sys
 from bs4 import BeautifulSoup
-
-
 
 # Configuración de Selenium
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-
-
-# Resto de las pruebas...
 
 # Ruta al ejecutable del driver de Brave
 brave_driver_path = 'C:\\Users\\juanp\\OneDrive\\Desktop\\AhorcadoJP\\chromedriver.exe'  # Reemplaza con la ruta correcta al ejecutable del driver de Brave
@@ -28,25 +20,19 @@ service = Service(brave_driver_path)
 
 # Opciones para el navegador Brave
 options = webdriver.ChromeOptions()
-options.binary_location = 'C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe'  # Reemplaza con la ruta correcta al ejecutable de Brave
+options.binary_location = 'C:\\Users\\PC\\Desktop\\Facultad\\5to\\Metodologia\\Agiles\\Ahorcado\\chromedriver.exe'  # Reemplaza con la ruta correcta al ejecutable de Brave
 options.add_argument("--start-maximized")
-
 
 # Inicialización del driver de Brave
 driver = webdriver.Chrome(service=service, options=options)
 driver.implicitly_wait(10)
 wait = WebDriverWait(driver, 10)
 
-if __name__ == '__main__':
-    subprocess.Popen(['python', 'run.py'])
-    
-    behave_executable.main(['-k', 'features/prueba_aceptacion.feature'])
-    
-    
-    
+
 @given('que estoy en la página de inicio')
 def step_estoy_en_pagina_inicio(context):
     driver.get('http://localhost:5000/')
+
 
 @when('hago clic en el botón "{button_text}"')
 def step_hago_clic_en_jugar(context, button_text):
