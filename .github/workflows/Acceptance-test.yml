@@ -26,7 +26,6 @@ jobs:
 
     - name: Descargar Brave Browser
       run: curl -SL https://github.com/brave/brave-browser/releases/download/v1.31.88/brave-browser-1.31.88-linux-x64.zip -o brave-browser-1.31.88-linux-x64.zip
-
     - name: Descomprimir Brave Browser
       run: unzip -o brave-browser-1.31.88-linux-x64.zip -d brave-browser
 
