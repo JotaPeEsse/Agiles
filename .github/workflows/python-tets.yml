@@ -41,13 +41,14 @@ jobs:
 
     - name: Run tests with coverage and Behave
       env:
-        CHROME_DRIVER_PATH: ${{ github.workspace }}/drivers/chromedriver.exe
-        BRAVE_EXECUTABLE_PATH: C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe
+        CHROME_DRIVER_PATH: ${{ github.workspace }}/drivers/chromedriver
+        BRAVE_EXECUTABLE_PATH: C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe
+        # Reemplaza esta ruta con la ruta correcta del ejecutable de Brave en Ubuntu
         COVERAGE_FILE: ${{ github.workspace }}/coverage/.coverage
       run: |
         python -m behave
 
-        # Resto de los comandos relacionados con las pruebas unitarias y de cobertura...
+
 
 
 
