@@ -36,23 +36,9 @@ jobs:
         Expand-Archive -Path $output -DestinationPath drivers
         Remove-Item $output
 
-    - name: Set up Brave binary path
-      run: |
-        echo "BRAVE_EXECUTABLE_PATH='C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe'" >> $GITHUB_ENV
-
-    - name: Set up Chrome binary path
-      run: |
-        echo "CHROME_BINARY_PATH='C:\Program Files\Google\Chrome\Application\chrome.exe'" >> $GITHUB_ENV
-
-    - name: Show environment variables
-      run: |
-        echo "BRAVE_EXECUTABLE_PATH: $env:BRAVE_EXECUTABLE_PATH"
-        echo "CHROME_BINARY_PATH: $env:CHROME_BINARY_PATH"
-
     - name: Run acceptance tests with Behave and Selenium
-      env:
-        BRAVE_EXECUTABLE_PATH: ${{ env.BRAVE_EXECUTABLE_PATH }}
-        CHROME_BINARY_PATH: ${{ env.CHROME_BINARY_PATH }}
       run: |
-        behave features
+        $brave_path = "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe"
+        $chrome_path = "C:\Program Files\Google\Chrome\Application\chrome.exe"
+        behave --define BRAVE_EXECUTABLE_PATH=$brave_path --define CHROME_BINARY_PATH=$chrome_path features
 
