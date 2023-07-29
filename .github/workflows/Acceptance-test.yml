@@ -38,9 +38,7 @@ jobs:
 
     - name: Verify Brave executable
       run: |
-        $brave_path = "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe"
-        $app_folder = "C:\Program Files\BraveSoftware\Brave-Browser\Application"
-        Get-ChildItem $app_folder
+        $brave_path = "C:\Program Files\BraveSoftware\Brave-Browser\Brave.exe"
         if (Test-Path $brave_path) {
           Write-Host "Brave executable found."
         } else {
@@ -50,9 +48,10 @@ jobs:
 
     - name: Run acceptance tests with Behave and Selenium
       run: |
-        $brave_path = "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe"
+        $brave_path = "C:\Program Files\BraveSoftware\Brave-Browser\Brave.exe"
         $chrome_path = "C:\Users\PC\Desktop\Facultad\5to\Metodologia\Agiles\Ahorcado\chromedriver.exe"
         behave --define BRAVE_EXECUTABLE_PATH=$brave_path --define CHROME_BINARY_PATH=$chrome_path features
+
 
 
 
