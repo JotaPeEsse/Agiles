@@ -30,7 +30,7 @@ jobs:
     - name: Set up Chrome driver
       run: |
         mkdir drivers
-        $url = "https://chromedriver.storage.googleapis.com/94.0.4606.61/chromedriver_win32.zip"
+        $url = "https://chromedriver.storage.googleapis.com/95.0.4638.17/chromedriver_win32.zip"
         $output = "drivers\chromedriver.zip"
         Invoke-WebRequest -Uri $url -OutFile $output
         Expand-Archive -Path $output -DestinationPath drivers
@@ -46,6 +46,7 @@ jobs:
         $brave_path = "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe"
         $chrome_path = "C:\SeleniumWebDrivers\ChromeDriver\chromedriver.exe"
         behave --define BRAVE_EXECUTABLE_PATH=$brave_path --define CHROME_BINARY_PATH=$chrome_path features
+
 
 
 
