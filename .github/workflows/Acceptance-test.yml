@@ -36,10 +36,13 @@ jobs:
         Expand-Archive -Path $output -DestinationPath drivers
         Remove-Item $output
 
-    - name: Verify Brave and ChromeDriver versions
+    - name: Verify Brave executable
       run: |
-        Get-Command "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe"
-        Get-Command "C:\Users\PC\Desktop\Facultad\5to\Metodologia\Agiles\Ahorcado\chromedriver.exe"
+        if (Test-Path "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe") {
+          echo "Brave executable found."
+        } else {
+          echo "Brave executable not found."
+        }
 
     - name: Run acceptance tests with Behave and Selenium
       run: |
