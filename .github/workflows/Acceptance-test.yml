@@ -34,7 +34,7 @@ jobs:
         if [ "$(uname)" = "Darwin" ]; then
           wget -q -O drivers/chromedriver.zip "https://chromedriver.storage.googleapis.com/${VERSION}/chromedriver_mac64.zip"
         else
-          wget -q -O drivers/chromedriver.zip "https://chromedriver.storage.googleapis.com/${VERSION}/chromedriver_linux64.zip"
+          wget -q -O drivers/chromedriver.zip "https://chromedriver.storage.googleapis.com/${VERSION}/chromedriver_win32.zip"
         fi
         unzip -q drivers/chromedriver.zip -d drivers
         chmod +x drivers/chromedriver
@@ -52,5 +52,9 @@ jobs:
         echo "export CHROME_BINARY_PATH='C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'" >> $GITHUB_ENV
 
     - name: Run acceptance tests with Behave and Selenium
+      env:
+        BRAVE_EXECUTABLE_PATH: ${{ env.BRAVE_EXECUTABLE_PATH }}
+        CHROME_BINARY_PATH: ${{ env.CHROME_BINARY_PATH }}
       run: |
         behave features
+
