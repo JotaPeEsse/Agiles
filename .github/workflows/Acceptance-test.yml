@@ -46,6 +46,7 @@ jobs:
           exit 1
         }
 
+        
     - name: Run acceptance tests with Behave and Selenium
       run: |
         $brave_path = "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe"
