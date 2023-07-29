@@ -13,7 +13,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
 # Ruta al ejecutable del driver de Brave
-brave_driver_path = 'C:\\Users\\juanp\\OneDrive\\Desktop\\AhorcadoJP\\chromedriver.exe'  # Reemplaza con la ruta correcta al ejecutable del driver de Brave
+brave_driver_path = 'C:\\Program Files\\BraveSoftware\\Brave-Browser\\brave.exe'  # Reemplaza con la ruta correcta al ejecutable del driver de Brave
 
 # Configuración del servicio del driver
 service = Service(brave_driver_path)
