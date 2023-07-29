@@ -31,7 +31,6 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install behave selenium
-
       - name: Run acceptance tests
         run: python path/to/your/tests.py  # Replace "path/to/your/tests.py" with the actual path to your tests.py file
 
