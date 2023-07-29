@@ -11,7 +11,7 @@ import sys
 from bs4 import BeautifulSoup
 
 # Ruta al ejecutable del driver de ChromeDriver
-chrome_driver_path = 'C:\\Users\\PC\\Desktop\\Facultad\\5to\\Metodologia\\Agiles\\Ahorcado\\chromedriver.exe'  # Reemplaza con la ruta correcta al ejecutable del driver de ChromeDriver
+chrome_driver_path = 'C:\\SeleniumWebDrivers\\ChromeDriver\\chromedriver.exe'  # Reemplaza con la ruta correcta al ejecutable del driver de ChromeDriver
 
 # Ruta al ejecutable de Brave
 brave_executable_path = 'C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe'  # Reemplaza con la ruta correcta al ejecutable de Brave
@@ -34,7 +34,6 @@ if __name__ == '__main__':
     subprocess.Popen(['python', 'run.py'])
     
     behave_executable.main(['-k', 'features/prueba_aceptacion.feature'])
-    
 
 @given('que estoy en la página de inicio')
 def step_estoy_en_pagina_inicio(context):
@@ -51,6 +50,7 @@ def step_hago_clic_en_jugar(context, button_text):
 
     # Obtener la respuesta de la página y guardarla en el contexto
     context.response = driver.page_source
+
 
 
 @then('debería ser redirigido a la página del juego')
