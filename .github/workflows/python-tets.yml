@@ -30,26 +30,28 @@ jobs:
     - name: Set up Chrome driver
       run: |
         mkdir drivers
-        $env:VERSION="95.0.4638.17"
-        Invoke-WebRequest -Uri "https://chromedriver.storage.googleapis.com/${VERSION}/chromedriver_win32.zip" -OutFile drivers\chromedriver.zip
-        Expand-Archive -Path drivers\chromedriver.zip -DestinationPath drivers
-        Remove-Item drivers\chromedriver.zip
+        $url = "https://chromedriver.storage.googleapis.com/95.0.4638.17/chromedriver_win32.zip"
+        $out = "drivers/chromedriver.zip"
+        Invoke-WebRequest $url -OutFile $out
+        Expand-Archive $out -DestinationPath drivers
+        Remove-Item $out
 
     - name: Verify Chrome driver version
       run: |
-        C:\Users\PC\Desktop\Facultad\5to\Metodologia\Agiles\Ahorcado\drivers\chromedriver.exe --version  # Asegurarse de que el controlador esté en la ruta correcta y mostrar su versión
+        drivers/chromedriver.exe --version  # Asegurarse de que el controlador esté en la ruta correcta y mostrar su versión
 
     - name: Run tests with coverage and Behave
       env:
-        COVERAGE_FILE: C:\Users\PC\Desktop\Facultad\5to\Metodologia\Agiles\Ahorcado\coverage\.coverage
+        COVERAGE_FILE: ${{ github.workspace }}/coverage/.coverage
       run: |
         coverage run -m pytest
-        coverage xml -o C:\Users\PC\Desktop\Facultad\5to\Metodologia\Agiles\Ahorcado\coverage.xml
+        coverage xml -o ${{ github.workspace }}/coverage.xml
 
-        mkdir C:\Users\PC\Desktop\Facultad\5to\Metodologia\Agiles\Ahorcado\coverage
-        cp C:\Users\PC\Desktop\Facultad\5to\Metodologia\Agiles\Ahorcado\coverage.xml C:\Users\PC\Desktop\Facultad\5to\Metodologia\Agiles\Ahorcado\coverage\coverage.xml
+        mkdir -p ${{ github.workspace }}/coverage
+        cp ${{ github.workspace }}/coverage.xml ${{ github.workspace }}/coverage/coverage.xml
 
         behave features
+
 
 
 
