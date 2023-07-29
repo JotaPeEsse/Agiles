@@ -27,7 +27,7 @@ jobs:
         python -m pip install beautifulsoup4
         python -m pip install selenium
 
-    - name: Set up Chrome driver
+    - name: Set up Brave driver
       run: |
         mkdir drivers
         $url = "https://chromedriver.storage.googleapis.com/95.0.4638.17/chromedriver_win32.zip"
@@ -36,12 +36,21 @@ jobs:
         Expand-Archive -Path $output -DestinationPath drivers
         Remove-Item $output
 
+    - name: Verify Brave executable
+      run: |
+        $brave_path = "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe"
+        if (Test-Path $brave_path) {
+          Write-Host "Brave executable found."
+        } else {
+          Write-Host "Brave executable not found."
+          exit 1
+        }
+
     - name: Run acceptance tests with Behave and Selenium
       run: |
         $brave_path = "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe"
         $chrome_path = "C:\Users\PC\Desktop\Facultad\5to\Metodologia\Agiles\Ahorcado\chromedriver.exe"
         behave --define BRAVE_EXECUTABLE_PATH=$brave_path --define CHROME_BINARY_PATH=$chrome_path features
-
 
 
 
