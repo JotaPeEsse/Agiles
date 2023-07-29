@@ -38,7 +38,7 @@ jobs:
 
     - name: Verify Brave executable
       run: |
-        $brave_path = '"C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe"'
+        $brave_path = "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe"
         if (Test-Path $brave_path) {
           echo "Brave executable found."
         } else {
