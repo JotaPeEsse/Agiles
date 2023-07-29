@@ -20,28 +20,28 @@ jobs:
 
     - name: Install dependencies
       run: |
+        python -m pip install --upgrade pip
         python -m pip install pytest
         python -m pip install coverage
         python -m pip install behave
-        python -m pip install selenium
         python -m pip install beautifulsoup4
+        python -m pip install selenium
 
     - name: Set up Chrome driver
       run: |
-        mkdir -p drivers
+        mkdir -p ${{ github.workspace }}/drivers
         VERSION="95.0.4638.17"
-        wget -q -O drivers/chromedriver.zip "https://chromedriver.storage.googleapis.com/${VERSION}/chromedriver_win32.zip"
-        unzip -q drivers/chromedriver.zip -d drivers
-      
-    - name: Change permissions for Chrome driver
+        wget -q -O ${{ github.workspace }}/drivers/chromedriver.zip "https://chromedriver.storage.googleapis.com/${VERSION}/chromedriver_linux64.zip"
+        unzip -q ${{ github.workspace }}/drivers/chromedriver.zip -d ${{ github.workspace }}/drivers
+        chmod +x ${{ github.workspace }}/drivers/chromedriver
+
+    - name: Verify Chrome driver version
       run: |
-        chmod +x drivers/chromedriver
+        ${{ github.workspace }}/drivers/chromedriver --version
 
     - name: Run tests with coverage and Behave
       env:
         COVERAGE_FILE: ${{ github.workspace }}/coverage/.coverage
-        CHROME_DRIVER_PATH: ${{ github.workspace }}/drivers/chromedriver.exe
-        BRAVE_EXECUTABLE_PATH: "C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe"
       run: |
         coverage run -m pytest
         coverage xml -o ${{ github.workspace }}/coverage.xml
@@ -49,7 +49,9 @@ jobs:
         mkdir -p ${{ github.workspace }}/coverage
         cp ${{ github.workspace }}/coverage.xml ${{ github.workspace }}/coverage/coverage.xml
 
-        behave features
+        cd ${{ github.workspace }}/features
+        behave
+
 
 
 
