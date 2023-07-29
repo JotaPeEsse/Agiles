@@ -28,8 +28,8 @@ jobs:
       - name: Ejecutar pruebas de aceptación
         run: |
           # Configura la ubicación de los archivos brave.exe y chromedriver.exe según la información que proporcionaste
-          export PATH="$PATH:C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application"
-          export PATH="$PATH:C:\\Users\\PC\\Desktop\\Facultad\\5to\\Metodologia\\Agiles\\Ahorcado"
+          export PATH="$PATH:C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe"
+          export PATH="$PATH:C:\\Users\\PC\\Desktop\\Facultad\\5to\\Metodologia\\Agiles\\Ahorcado\\chromedriver.exe"
 
           # Ejecuta las pruebas de aceptación
           python tests.py
