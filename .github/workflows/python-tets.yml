@@ -32,6 +32,9 @@ jobs:
         VERSION="95.0.4638.17"
         wget -q -O drivers/chromedriver.zip "https://chromedriver.storage.googleapis.com/${VERSION}/chromedriver_win32.zip"
         unzip -q drivers/chromedriver.zip -d drivers
+      
+    - name: Change permissions for Chrome driver
+      run: |
         chmod +x drivers/chromedriver
 
     - name: Run tests with coverage and Behave
