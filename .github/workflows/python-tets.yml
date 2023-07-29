@@ -29,16 +29,15 @@ jobs:
 
     - name: Set up Chrome driver
       run: |
-        mkdir drivers
-        $url = "https://chromedriver.storage.googleapis.com/95.0.4638.17/chromedriver_win32.zip"
-        $out = "drivers/chromedriver.zip"
-        Invoke-WebRequest $url -OutFile $out
-        Expand-Archive $out -DestinationPath drivers
-        Remove-Item $out
+        mkdir -p drivers
+        VERSION="95.0.4638.17"
+        wget -q -O drivers/chromedriver.zip "https://chromedriver.storage.googleapis.com/${VERSION}/chromedriver_linux64.zip"
+        unzip -q drivers/chromedriver.zip -d drivers
+        chmod +x drivers/chromedriver
 
     - name: Verify Chrome driver version
       run: |
-        drivers/chromedriver.exe --version  # Asegurarse de que el controlador esté en la ruta correcta y mostrar su versión
+        drivers/chromedriver --version  # Asegurarse de que el controlador esté en la ruta correcta y mostrar su versión
 
     - name: Run tests with coverage and Behave
       env:
@@ -51,6 +50,7 @@ jobs:
         cp ${{ github.workspace }}/coverage.xml ${{ github.workspace }}/coverage/coverage.xml
 
         behave features
+
 
 
 
