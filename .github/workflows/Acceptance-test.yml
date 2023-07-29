@@ -7,7 +7,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - name: Checkout repository
@@ -29,27 +29,20 @@ jobs:
 
     - name: Set up Chrome driver
       run: |
-        mkdir -p drivers
-        VERSION="95.0.4638.17"
-        if [ "$(uname)" = "Darwin" ]; then
-          wget -q -O drivers/chromedriver.zip "https://chromedriver.storage.googleapis.com/${VERSION}/chromedriver_mac64.zip"
-        else
-          wget -q -O drivers/chromedriver.zip "https://chromedriver.storage.googleapis.com/${VERSION}/chromedriver_win32.zip"
-        fi
-        unzip -q drivers/chromedriver.zip -d drivers
-        chmod +x drivers/chromedriver
-
-    - name: Verify Chrome driver version
-      run: |
-        drivers/chromedriver --version  # Asegurarse de que el controlador esté en la ruta correcta y mostrar su versión
+        mkdir drivers
+        $url = "https://chromedriver.storage.googleapis.com/95.0.4638.17/chromedriver_win32.zip"
+        $output = "drivers\chromedriver.zip"
+        Invoke-WebRequest -Uri $url -OutFile $output
+        Expand-Archive -Path $output -DestinationPath drivers
+        Remove-Item $output
 
     - name: Set up Brave binary path
       run: |
-        echo "export BRAVE_EXECUTABLE_PATH='C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe'" >> $GITHUB_ENV
+        echo "BRAVE_EXECUTABLE_PATH='C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe'" >> $GITHUB_ENV
 
     - name: Set up Chrome binary path
       run: |
-        echo "export CHROME_BINARY_PATH='C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'" >> $GITHUB_ENV
+        echo "CHROME_BINARY_PATH='C:\Program Files\Google\Chrome\Application\chrome.exe'" >> $GITHUB_ENV
 
     - name: Run acceptance tests with Behave and Selenium
       env:
