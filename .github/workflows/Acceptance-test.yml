@@ -1,38 +1,41 @@
-name: Run Acceptance Tests
+name: Test Brave Browser
 
 on: [push]
 
 jobs:
-  build:
+  test_brave:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Install ChromeDriver
-        run: |
-          mkdir $HOME/drivers
-          curl -SL https://chromedriver.storage.googleapis.com/93.0.4577.15/chromedriver_linux64.zip -o $HOME/drivers/chromedriver_linux64.zip
-          unzip -o $HOME/drivers/chromedriver_linux64.zip -d $HOME/drivers
-          echo "export PATH=\$PATH:$HOME/drivers" >> $GITHUB_ENV
+    - name: Install Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
 
-      - name: Install Brave
-        run: |
-          curl -SL https://github.com/brave/brave-browser/releases/download/v1.31.88/brave-browser-1.31.88-linux-x64.zip -o brave-browser-1.31.88-linux-x64.zip
-          unzip -o brave-browser-1.31.88-linux-x64.zip -d brave-browser
-          echo "export PATH=\$PATH:$(pwd)/brave-browser" >> $GITHUB_ENV
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'  # Use the version of Python required for your tests
+    - name: Download and Install Brave Browser
+      run: |
+        curl -SL https://github.com/brave/brave-browser/releases/download/v1.31.88/brave-browser-1.31.88-linux-x64.zip -O
+        unzip -o brave-browser-1.31.88-linux-x64.zip -d brave-browser
+        echo "export PATH=\$PATH:$(pwd)/brave-browser" >> $GITHUB_ENV
 
-      - name: Install dependencies
-        run: |
-          pip install --upgrade pip
-          pip install behave selenium
-      - name: Run acceptance tests
-        run: python path/to/your/tests.py  # Replace "path/to/your/tests.py" with the actual path to your tests.py file
+    - name: Download and Install ChromeDriver
+      run: |
+        curl -SL https://chromedriver.storage.googleapis.com/93.0.4577.15/chromedriver_linux64.zip -O
+        unzip -o chromedriver_linux64.zip -d chromedriver
+        echo "export PATH=\$PATH:$(pwd)/chromedriver" >> $GITHUB_ENV
+
+    - name: Run Behave Tests
+      run: |
+        behave
+
+
 
 
 
