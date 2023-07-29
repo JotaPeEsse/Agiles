@@ -1,4 +1,4 @@
-name: Pruebas de Aceptacion
+name: Descargar y configurar Brave Browser
 
 on:
   push:
@@ -6,34 +6,34 @@ on:
       - main
 
 jobs:
-  test:
+  setup-brave:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout del código fuente
+    - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Configurar Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.9
-
-    - name: Instalar dependencias
+    - name: Download Brave Browser
       run: |
-        pip install behave
-        pip install selenium
-        # Agrega aquí otras dependencias si las necesitas
+        curl -SL https://github.com/brave/brave-browser/releases/download/v1.31.88/brave-browser-1.31.88-linux-x64.zip -o brave-browser-1.31.88-linux-x64.zip
 
-    - name: Descargar Brave Browser
-      run: curl -SL https://github.com/brave/brave-browser/releases/download/v1.31.88/brave-browser-1.31.88-linux-x64.zip -o brave-browser-1.31.88-linux-x64.zip
-    - name: Descomprimir Brave Browser
+    - name: Unzip Brave Browser
       run: unzip -o brave-browser-1.31.88-linux-x64.zip -d brave-browser
 
-    - name: Agregar ubicación de Brave Browser al PATH
+    - name: Set Brave Browser Path
       run: echo "export PATH=\$PATH:$(pwd)/brave-browser" >> $GITHUB_ENV
 
-    - name: Ejecutar pruebas de aceptación
-      run: python tests.py  # Asegúrate de que este comando sea correcto para ejecutar tus pruebas
+    - name: Install Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Install Dependencies
+      run: pip install -r requirements.txt
+
+    - name: Run Tests
+      run: python tests.py
+
 
 
 
