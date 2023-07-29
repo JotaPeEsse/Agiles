@@ -31,7 +31,11 @@ jobs:
       run: |
         mkdir -p drivers
         VERSION="95.0.4638.17"
-        wget -q -O drivers/chromedriver.zip "https://chromedriver.storage.googleapis.com/${VERSION}/chromedriver_linux64.zip"
+        if [ "$(uname)" = "Darwin" ]; then
+          wget -q -O drivers/chromedriver.zip "https://chromedriver.storage.googleapis.com/${VERSION}/chromedriver_mac64.zip"
+        else
+          wget -q -O drivers/chromedriver.zip "https://chromedriver.storage.googleapis.com/${VERSION}/chromedriver_linux64.zip"
+        fi
         unzip -q drivers/chromedriver.zip -d drivers
         chmod +x drivers/chromedriver
 
@@ -41,6 +45,7 @@ jobs:
 
     - name: Run tests with coverage and Behave
       env:
+        BRAVE_EXECUTABLE_PATH: /usr/bin/brave-browser  # Reemplaza esta ruta con la ruta correcta del ejecutable de Brave en Ubuntu
         COVERAGE_FILE: ${{ github.workspace }}/coverage/.coverage
       run: |
         coverage run -m pytest
