@@ -15,9 +15,10 @@ jobs:
       with:
         python-version: 3.9
 
-    - name: Install dependencies
+    - name: Install Behave and Selenium
       run: |
-        pip install -r requirements.txt
+        pip install behave==1.2.6
+        pip install selenium==4.10.0
 
     - name: Download and Install Brave Browser
       run: |
