@@ -39,12 +39,13 @@ jobs:
     - name: Verify Chrome and ChromeDriver versions
       run: |
         Get-Command "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe"
-        Get-Command "drivers\chromedriver.exe"
+        Get-Command "C:\Users\PC\Desktop\Facultad\5to\Metodologia\Agiles\Ahorcado\chromedriver.exe"
+        
 
     - name: Run acceptance tests with Behave and Selenium
       run: |
         $brave_path = "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe"
-        $chrome_path = "drivers\chromedriver.exe"
+        $chrome_path = "C:\Users\PC\Desktop\Facultad\5to\Metodologia\Agiles\Ahorcado\chromedriver.exe"
         behave --define BRAVE_EXECUTABLE_PATH=$brave_path --define CHROME_BINARY_PATH=$chrome_path features
 
 
