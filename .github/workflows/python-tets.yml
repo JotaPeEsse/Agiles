@@ -45,7 +45,7 @@ jobs:
 
     - name: Run tests with coverage and Behave
       env:
-        BRAVE_EXECUTABLE_PATH: /usr/bin/brave-browser  # Reemplaza esta ruta con la ruta correcta del ejecutable de Brave en Ubuntu
+        BRAVE_EXECUTABLE_PATH: C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe # Reemplaza esta ruta con la ruta correcta del ejecutable de Brave en Ubuntu
         COVERAGE_FILE: ${{ github.workspace }}/coverage/.coverage
       run: |
         coverage run -m pytest
