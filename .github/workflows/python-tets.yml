@@ -43,7 +43,6 @@ jobs:
       run: |
         coverage run -m pytest
         coverage xml -o "C:\Users\PC\Desktop\Facultad\5to\Metodologia\Agiles\Ahorcado\coverage.xml"
-
         mkdir -p "C:\Users\PC\Desktop\Facultad\5to\Metodologia\Agiles\Ahorcado\coverage"
         cp "C:\Users\PC\Desktop\Facultad\5to\Metodologia\Agiles\Ahorcado\coverage.xml" "C:\Users\PC\Desktop\Facultad\5to\Metodologia\Agiles\Ahorcado\coverage\coverage.xml"
 
