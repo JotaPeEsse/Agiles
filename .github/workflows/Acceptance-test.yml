@@ -8,22 +8,22 @@ on:
 jobs:
   setup-brave:
     runs-on: ubuntu-latest
-      
+
     steps:
     - name: Download Brave Browser
       run: |
         curl -SL https://github.com/brave/brave-browser/releases/download/v1.31.88/brave-browser-1.31.88-linux-x64.zip -o brave-browser-1.31.88-linux-x64.zip
-      
+
     - name: Check file size
       run: |
         ls -lh brave-browser-1.31.88-linux-x64.zip
-      
+
     - name: Unzip Brave Browser
       run: unzip -o brave-browser-1.31.88-linux-x64.zip -d brave-browser
-      
+
     - name: Set Brave Browser Path
       run: echo "export PATH=\$PATH:$(pwd)/brave-browser" >> $GITHUB_ENV
-
+      
     - name: Install Python
       uses: actions/setup-python@v2
       with:
