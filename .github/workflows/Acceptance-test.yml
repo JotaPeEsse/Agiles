@@ -3,42 +3,38 @@ name: Run Acceptance Tests
 on: [push]
 
 jobs:
-  acceptance_tests:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.x
+      - name: Install ChromeDriver
+        run: |
+          mkdir $HOME/drivers
+          curl -SL https://chromedriver.storage.googleapis.com/93.0.4577.15/chromedriver_linux64.zip -o $HOME/drivers/chromedriver_linux64.zip
+          unzip -o $HOME/drivers/chromedriver_linux64.zip -d $HOME/drivers
+          echo "export PATH=\$PATH:$HOME/drivers" >> $GITHUB_ENV
 
-    - name: Install ChromeDriver
-      run: |
-        mkdir $HOME/drivers
-        curl -L https://chromedriver.storage.googleapis.com/$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE)/chromedriver_linux64.zip -o $HOME/drivers/chromedriver_linux64.zip
-        unzip $HOME/drivers/chromedriver_linux64.zip -d $HOME/drivers
-        chmod +x $HOME/drivers/chromedriver
-        echo "PATH=\$PATH:$HOME/drivers" >> $GITHUB_ENV
+      - name: Install Brave
+        run: |
+          curl -SL https://github.com/brave/brave-browser/releases/download/v1.31.88/brave-browser-1.31.88-linux-x64.zip -o brave-browser-1.31.88-linux-x64.zip
+          unzip -o brave-browser-1.31.88-linux-x64.zip -d brave-browser
+          echo "export PATH=\$PATH:$(pwd)/brave-browser" >> $GITHUB_ENV
 
-    - name: Install Brave
-      run: |
-        curl -L -o brave-browser.zip https://github.com/brave/brave-browser/releases/download/v1.31.88/brave-browser-1.31.88-linux-x64.zip
-        unzip brave-browser.zip
-        echo "export PATH=\$PATH:$(pwd)/brave-browser" >> $GITHUB_ENV
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'  # Use the version of Python required for your tests
 
-    - name: Install dependencies
-      run: |
-        python -m pip install behave
-        python -m pip install selenium
-        python -m pip install beautifulsoup4
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install behave selenium
 
-    - name: Run acceptance tests
-      run: |
-        cd C:/Users/PC/Desktop/Facultad/5to/Metodologia/Agiles/features/steps
-        python tests.py
+      - name: Run acceptance tests
+        run: python path/to/your/tests.py  # Replace "path/to/your/tests.py" with the actual path to your tests.py file
+
 
 
 
