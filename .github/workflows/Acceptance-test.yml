@@ -37,8 +37,9 @@ jobs:
 
     - name: Run acceptance tests
       run: |
-        cd features/steps
+        cd C:/Users/PC/Desktop/Facultad/5to/Metodologia/Agiles/features/steps
         python tests.py
+
 
 
 
