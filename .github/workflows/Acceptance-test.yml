@@ -1,40 +1,41 @@
-name: Test Brave Browser
+name: Pruebas de Aceptacion
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  test_brave:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout del código fuente
       uses: actions/checkout@v2
 
-    - name: Install Python
+    - name: Configurar Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.9
+        python-version: 3.x  # Reemplaza "3.x" con la versión de Python que necesitas
 
-    - name: Install Behave and Selenium
+    - name: Instalar dependencias
       run: |
-        pip install behave==1.2.6
-        pip install selenium==4.10.0
+        pip install behave
+        pip install selenium
+        # Agrega aquí otras dependencias si las necesitas
 
-    - name: Download and Install Brave Browser
-      run: |
-        curl -SL https://github.com/brave/brave-browser/releases/download/v1.31.88/brave-browser-1.31.88-linux-x64.zip -O
-        unzip -o brave-browser-1.31.88-linux-x64.zip -d brave-browser
-        echo "export PATH=\$PATH:$(pwd)/brave-browser" >> $GITHUB_ENV
+    - name: Descargar Brave Browser
+      run: curl -SL https://github.com/brave/brave-browser/releases/download/v1.31.88/brave-browser-1.31.88-linux-x64.zip -o brave-browser-1.31.88-linux-x64.zip
 
-    - name: Download and Install ChromeDriver
-      run: |
-        curl -SL https://chromedriver.storage.googleapis.com/93.0.4577.15/chromedriver_linux64.zip -O
-        unzip -o chromedriver_linux64.zip -d chromedriver
-        echo "export PATH=\$PATH:$(pwd)/chromedriver" >> $GITHUB_ENV
+    - name: Descomprimir Brave Browser
+      run: unzip -o brave-browser-1.31.88-linux-x64.zip -d brave-browser
 
-    - name: Run Behave Tests
-      run: |
-        behave
+    - name: Agregar ubicación de Brave Browser al PATH
+      run: echo "export PATH=\$PATH:$(pwd)/brave-browser" >> $GITHUB_ENV
+
+    - name: Ejecutar pruebas de aceptación
+      run: python tests.py  # Asegúrate de que este comando sea correcto para ejecutar tus pruebas
+
 
 
 
