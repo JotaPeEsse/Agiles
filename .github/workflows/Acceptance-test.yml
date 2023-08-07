@@ -1,40 +1,31 @@
-name: Acceptance test
+name: Run Behave Tests with Playwright
 
-on:
-  push:
-    branches:
-      - main
+on: [push]
 
 jobs:
-  setup-brave:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Download Brave Browser
-      run: |
-        wget https://github.com/brave/brave-browser/releases/download/v1.31.88/brave-browser-1.31.88-linux-x64.zip
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-    - name: Check file size
-      run: |
-        ls -lh brave-browser-1.31.88-linux-x64.zip
-
-    - name: Unzip Brave Browser
-      run: unzip -o brave-browser-1.31.88-linux-x64.zip -d brave-browser
-
-    - name: Set Brave Browser Path
-      run: echo "export PATH=\$PATH:$(pwd)/brave-browser" >> $GITHUB_ENV
-
-
-    - name: Install Python
+    - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.x
+        python-version: 3.8
 
-    - name: Install Dependencies
-      run: pip install -r requirements.txt
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install playwright
+        playwright install
+        pip install behave
 
-    - name: Run Tests
-      run: python test.py
+    - name: Run tests
+      run: |
+        behave tests
+
 
 
 
