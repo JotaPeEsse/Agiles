@@ -1,7 +1,5 @@
 from playwright.sync_api import Page, Browser, sync_playwright
 from behave import given, when, then
-import nest_asyncio
-nest_asyncio.apply()
 import time
 
 
