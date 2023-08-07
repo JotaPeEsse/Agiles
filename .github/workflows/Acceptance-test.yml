@@ -24,7 +24,7 @@ jobs:
 
     - name: Run tests
       run: |
-        behave test
+        behave features
 
 
 
