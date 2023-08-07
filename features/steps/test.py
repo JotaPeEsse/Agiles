@@ -1,6 +1,5 @@
 from playwright.sync_api import Page, Browser, sync_playwright
 from behave import given, when, then
-import pytest
 from bs4 import BeautifulSoup
 import nest_asyncio
 nest_asyncio.apply()
@@ -36,7 +35,6 @@ def step_deberia_ser_redirigido(context):
     time.sleep(2)
     
     
-
 
 @pytest.fixture
 def context():
