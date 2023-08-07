@@ -20,6 +20,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install playwright
         pip install behave
+        playwright install # Agrega esta línea para instalar los navegadores
 
     - name: Run tests
       run: |
