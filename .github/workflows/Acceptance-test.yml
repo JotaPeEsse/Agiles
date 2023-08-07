@@ -1,4 +1,4 @@
-name: Descargar y configurar Brave Browser
+name: Acceptance test
 
 on:
   push:
@@ -34,7 +34,7 @@ jobs:
       run: pip install -r requirements.txt
 
     - name: Run Tests
-      run: python tests.py
+      run: python test.py
 
 
 

@@ -1,0 +1,18 @@
+[
+  "Ahorcado/test_ahorcado.py::TestCrearCadenasOcultas::test_crear_cadenas",
+  "Ahorcado/test_ahorcado.py::TestCrearMuñecoAhorcado::test_crear_muñeco_ahorcado",
+  "Ahorcado/test_ahorcado.py::TestIngresarPalabra::test_ingreso_de_palabra",
+  "Ahorcado/test_ahorcado.py::TestIntentos::test_intentos",
+  "Ahorcado/test_ahorcado.py::TestIntentosRestantes::test_contar_intentos_restantes",
+  "Ahorcado/test_ahorcado.py::TestLetraIncorrecta::test_letra_incorrecta",
+  "Ahorcado/test_ahorcado.py::TestLetraValida::test_palabra_valida",
+  "Ahorcado/test_ahorcado.py::TestLetrasIngresadas::test_letras_ingresadas",
+  "Ahorcado/test_ahorcado.py::TestPalabraAleatoria::test_palabra_aleatoria",
+  "Ahorcado/test_ahorcado.py::TestPalabraGanadora::test_palabra_ganadora",
+  "Ahorcado/test_ahorcado.py::TestPalabraOculta::test_palabra_oculta",
+  "Ahorcado/test_ahorcado.py::TestVereficarNoRepeticionLetra::test_verificar_no_repeticion_letra",
+  "Ahorcado/test_ahorcado.py::TestVereficarRepeticionLetra::test_verificar_repeticion_letra",
+  "Ahorcado/test_ahorcado.py::TestVerificacionLetraIncorrecta::test_verificacion_letra_incorrecta",
+  "Ahorcado/test_ahorcado.py::TestVerificarDerrota::test_verificar_derrota",
+  "features/steps/test_my_application.py::test_homepage_has_Playwright_in_title_and_get_started_link_linking_to_the_intro_page[chromium]"
+]
