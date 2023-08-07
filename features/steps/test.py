@@ -33,6 +33,3 @@ def step_deberia_ser_redirigido(context):
     
     
 
-@pytest.fixture
-def context():
-    return {}
