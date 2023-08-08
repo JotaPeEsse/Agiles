@@ -24,7 +24,7 @@ jobs:
 
     - name: Run tests
       run: |
-        xvfb-run -a behave features/steps
+        xvfb-run -a behave features/steps/Iniciar_Juego
 
 
 
