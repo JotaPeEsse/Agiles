@@ -1,4 +1,4 @@
-name: Run Behave Tests with Playwright
+name: Run Behave Tests with Playwright - Iniciar Juego
 
 on: [push]
 
