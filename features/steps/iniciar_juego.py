@@ -30,6 +30,7 @@ def step_deberia_ser_redirigido(context):
     current_url = context.page.url
     assert current_url == target_url, f"URL actual: {current_url}, URL objetivo: {target_url}"
     time.sleep(2)
-    
+
+  
     
 
