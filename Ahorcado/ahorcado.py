@@ -7,7 +7,9 @@ class Ahorcado:
         return letras_ingresadas.count(letra) >= 2
 
     def crear_cadenas(self):
-        palabras = ['Gato', 'Perro', 'Lapiz', 'Computadora', 'Felicidad']
+        palabras = ['Gato', 'Computadora', 'Felicidad', 
+            'Jardin','Pelota', 'Montaña', 'Cafe', 'Luna', 
+            'Rana',  'Musica', 'Playa', 'Puerta', 'Risa']
         palabra = random.choice(palabras)
         palabra_escondida = '_' * len(palabra)
         return palabra, palabra_escondida

@@ -1,44 +1,46 @@
-{% extends "base.html"%}
+{% extends "base.html" %}
 
 <!DOCTYPE html>
 <html>
 <head>
     <title>Juego del Ahorcado</title>
-    
 </head>
 
 <body>
     {% block content %}
-    
+
     <div id="juego">
         <div id="dibujo">
             <pre>{{ dibujo }}</pre>
         </div>
-            <div id="pal">
-            <h2>Palabra: {{ escondida }}</h2>
-          </div>
-            <div id="palabra">
+        <div id="pal">
+            <h2>Palabra: {{ ' '.join(escondida) }}</h2>
+        </div>
+        
+        <div id="palabra">
             <h2 hidden>{{ palabra }}</h2>
         </div>
-        <div id="intentos">
+        <div id="intentos" style="color: rgb(136, 3, 3);">
             <h2>Intentos restantes: {{ max_fallos - fallos }}</h2>
+        </div>
+        <div id="letras-ingresadas">
+            <h5>Letras ingresadas: {{ ' '.join(letras_ingresadas) }}</h5>
         </div>
         {% if resultado == 'ganaste' %}
         <div id="resultado" class="ganaste">
             <div id="resu_auto">
-            <h2>¡Ganaste!</h2>
-             </div>
-             
+                <h2>¡Ganaste!</h2>
+            </div>
             <h2>La palabra era:</h2>
             <div id="pala_auto">
-            <h2>{{escondida}}</h2>
-              </div>
+                <h2>{{ escondida }}</h2>
+            </div>
             <a href="{{ url_for('juego') }}">Jugar de nuevo</a>
         </div>
         {% elif resultado == 'perdiste' %}
         <div id="resultado" class="perdiste">
             <h2>¡Perdiste!</h2>
-            <p>La palabra era: {{ palabra }}</p>
+            <h2>La palabra era: {{ palabra }}</h2>
             <a href="{{ url_for('juego') }}">Jugar de nuevo</a>
         </div>
         {% else %}
@@ -48,10 +50,11 @@
                 <button type="submit">Ingresar letra</button>
             </form>
         </div>
-        <a href="{{ url_for('home') }}" class="btn-black">Volver al inicio</a>
-
         {% endif %}
+        
+        <a href="{{ url_for('home') }}" class="btn-black">Volver al inicio</a>
     </div>
+
     {% endblock %}
 </body>
 </html>
