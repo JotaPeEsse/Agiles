@@ -24,4 +24,4 @@ jobs:
 
     - name: Run tests
       run: |
-        xvfb-run -a behave features/steps/ganar_juego.py
+        xvfb-run -a behave features/steps/ganar_juego
