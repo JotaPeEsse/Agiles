@@ -1,9 +1,19 @@
 from playwright.sync_api import Page, Browser, sync_playwright
 from behave import given, when, then
 from bs4 import BeautifulSoup
+
 import time
 
 BASE_URL = 'https://martinb.pythonanywhere.com/juego'
+
+from playwright.sync_api import sync_playwright
+
+def iniciar_navegador():
+    with sync_playwright() as p:
+        browser = p.chromium.launch()
+        page = browser.new_page()
+        return browser, page
+
 
 
 "-----------------------------------------------------Iniciar-Juego-----------------------------------------------------"  
@@ -106,4 +116,46 @@ def step_verificar_mensaje_ganador(context):
     mensaje_ganador = mensaje_ganador_element.inner_text()
     assert '¡Ganaste!' in mensaje_ganador
     time.sleep(2)    
+    
+@then('cierro el navegador')
+def step_cerrar_navegador(context):
+    context.browser.close() 
 
+"--------------------------------Adivinar-Letra---------------------------------------------------------------"
+
+
+
+@given('estoy en la página de juego')
+def step_estoy_en_pagina_inicio(context):
+    with sync_playwright() as p:
+        browser: Browser = p.chromium.launch(headless=False)
+        context.browser = browser
+        context.page = browser.new_page()
+        context.page.goto('https://martinb.pythonanywhere.com')
+        time.sleep(2)
+
+@when('ingreso la letra "{letra}"')
+def step_ingreso_letra(context, letra):
+    context.page.fill('input[name="letra"]', letra)
+    context.page.click('button[type="submit"]')
+    time.sleep(1)
+
+@then('debería ver la letra "{letra}" en la palabra oculta')
+def step_ver_letra_en_palabra_oculta(context, letra):
+    palabra_oculta = context.page.inner_text('#pal h2')
+    assert letra in palabra_oculta
+    time.sleep(1)
+@then('el dibujo del muñeco del ahorcado debería seguir vacío')
+def step_deberia_ver_dibujo_vacio(context):
+    page_source = context.page.content()
+    soup = BeautifulSoup(page_source, 'html.parser')
+    dibujo_muñeco = soup.find('div', id='dibujo').pre.text
+
+    assert '+---+' in dibujo_muñeco
+    assert 'O   |' not in dibujo_muñeco
+    time.sleep(1)
+@then('el número de intentos restantes debe mantenerse')
+def step_ver_intentos_restantes(context):
+    intentos_restantes = context.page.inner_text('#intentos h2')
+    assert intentos_restantes == 'Intentos restantes: 6'
+    time.sleep(1)
