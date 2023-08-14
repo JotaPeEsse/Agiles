@@ -131,7 +131,7 @@ def step_estoy_en_pagina_inicio(context):
         browser: Browser = p.chromium.launch(headless=False)
         context.browser = browser
         context.page = browser.new_page()
-        context.page.goto('https://martinb.pythonanywhere.com')
+        context.page.goto('https://martinb.pythonanywhere.com/juego')
         time.sleep(2)
 
 @when('ingreso la letra "{letra}"')
