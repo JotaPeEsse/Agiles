@@ -25,7 +25,7 @@ jobs:
         pip install BeautifulSoup4
     - name: Run tests
       run: |
-        xvfb-run -a behave features
+        xvfb-run -a behave iniciar_juego.py
 
 
 
