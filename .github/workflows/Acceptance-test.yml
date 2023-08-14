@@ -25,11 +25,7 @@ jobs:
 
     - name: Run tests
       run: |
-        behave 
-
-
-
-
+        python ganar_juego.py
 
 
 
