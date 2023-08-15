@@ -7,7 +7,7 @@ from behave import given, when, then
 import time
 
 # Definir el URL base para la página de juego
-BASE_URL = 'https://martinb.pythonanywhere.com/juego's
+BASE_URL = 'https://martinb.pythonanywhere.com/juego'
 
 
 # ---------------------------------------Iniciar Juego-------------------------------------------------------------
