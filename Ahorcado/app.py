@@ -55,6 +55,7 @@ def juego():
         return render_template('juego.html', palabra=palabra, escondida=escondida, fallos=fallos, dibujo=dibujo, resultado=resultado, max_fallos=max_fallos, letras_ingresadas=letras_ingresadas)  # Pasa la lista de letras ingresadas al contexto
     else:
         palabra, escondida = ahoracado.crear_cadenas()
+
         session['palabra'] = palabra
         session['escondida'] = escondida
         session['fallos'] = 0

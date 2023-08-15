@@ -26,6 +26,17 @@ jobs:
     - name: Run tests
       run: |
         xvfb-run -a behave features
+<<<<<<< Updated upstream
+=======
+        
+
+
+
+
+
+
+
+>>>>>>> Stashed changes
 
 
 
