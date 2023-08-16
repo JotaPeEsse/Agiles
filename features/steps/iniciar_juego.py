@@ -28,7 +28,6 @@ async def step_hago_clic_en_jugar(context, button_text):
     await button.click()
     time.sleep(2)
 
-
 @then('debería ser redirigido a la página del juego')
 async def step_deberia_ser_redirigido(context):
     target_url = BASE_URL
