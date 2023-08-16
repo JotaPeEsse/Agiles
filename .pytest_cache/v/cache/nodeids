@@ -14,5 +14,7 @@
   "Ahorcado/test_ahorcado.py::TestVereficarRepeticionLetra::test_verificar_repeticion_letra",
   "Ahorcado/test_ahorcado.py::TestVerificacionLetraIncorrecta::test_verificacion_letra_incorrecta",
   "Ahorcado/test_ahorcado.py::TestVerificarDerrota::test_verificar_derrota",
+  "Ahorcado/test_ahorcado.py::TestVerificarNoRepeticionLetra::test_verificar_no_repeticion_letra",
+  "Ahorcado/test_ahorcado.py::TestVerificarRepeticionLetra::test_verificar_repeticion_letra",
   "features/steps/test_my_application.py::test_homepage_has_Playwright_in_title_and_get_started_link_linking_to_the_intro_page[chromium]"
 ]

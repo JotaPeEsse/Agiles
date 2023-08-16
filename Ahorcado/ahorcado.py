@@ -1,12 +1,17 @@
 import random
 
+
 class Ahorcado:
 
     def verificar_repeticion_letra(self, letra, letras_ingresadas):
         return letra in letras_ingresadas
 
     def crear_cadenas(self):
-        palabras = ['Gato', 'Computadora', 'Felicidad', 'Jardin', 'Pelota', 'Montaña', 'Cafe', 'Luna', 'Rana', 'Musica', 'Playa', 'Puerta', 'Risa']
+        palabras = [
+        'Gato', 'Computadora', 'Felicidad', 'Jardin', 'Pelota',
+        'Montaña','Cafe', 'Luna', 'Rana', 'Musica',
+        'Playa', 'Puerta', 'Risa'
+        ]
         palabra = random.choice(palabras)
         palabra_escondida = '_' * len(palabra)
         return palabra, palabra_escondida

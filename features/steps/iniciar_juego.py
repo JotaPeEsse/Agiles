@@ -6,7 +6,6 @@ from bs4 import BeautifulSoup
 from behave import given, when, then
 import time
 
-# Definir el URL base para la página de juego
 BASE_URL = 'https://martinb.pythonanywhere.com/juego'
 
 
@@ -113,16 +112,12 @@ async def step_contador_intentos_disminuye(context):
 
 # --------------------------------------- Ganar el Juego -------------------------------------------------------------
 
-
-# Función para ingresar una letra en el campo de entrada
 def ingresar_letra(page, letra):
     input_selector = 'input[name="letra"]'
     page.wait_for_selector(input_selector)
     page.fill(input_selector, letra)
     page.click('button[type="submit"]')
 
-
-# Steps para el escenario de adivinar correctamente todas las letras de la palabra oculta
 @given('estoy en la página de juego')
 def step_abrir_pagina_de_juego(context):
     context.browser = sync_playwright().start().chromium.launch(headless=False)
@@ -133,25 +128,20 @@ def step_abrir_pagina_de_juego(context):
 
 @when('adivino correctamente todas las letras de la palabra oculta')
 def step_adivino_correctamente(context):
-    # Obtener la palabra oculta de la página
     palabra_oculta = context.page.inner_text('#palabra h2').strip().lower()
     print(palabra_oculta)
 
-    # Crear un conjunto para almacenar las letras adivinadas
     letras_adivinadas = set()
 
-    # Obtener el número de intentos restantes antes de adivinar las letras
     intentos_restantes_text = context.page.inner_text('#intentos h2')
     intentos_restantes = int(intentos_restantes_text.split()[-1])
 
-    # Adivinar cada letra de la palabra oculta
     for letra in palabra_oculta:
         if letra not in letras_adivinadas:
             ingresar_letra(context.page, letra)
-            time.sleep(2)  # Agrega una pausa entre las adivinanzas para evitar problemas
+            time.sleep(2)  
             letras_adivinadas.add(letra)
 
-    # Imprimir la palabra oculta final después de adivinar todas las letras
     palabra_oculta_actualizada = context.page.inner_text('#pal h2').strip().lower()
     print(f'Palabra oculta final: {palabra_oculta_actualizada}')
 
@@ -171,7 +161,7 @@ def step_ver_dibujo_estado_inicial(context):
 def step_ver_intentos_restantes(context):
     intentos_restantes_text = context.page.inner_text('#intentos h2')
     assert 'Intentos restantes' in intentos_restantes_text
-    assert intentos_restantes_text.split()[-1] != ''  # Aseguramos que el valor no esté vacío
+    assert intentos_restantes_text.split()[-1] != ''  
     assert 'Intentos restantes: 6' in intentos_restantes_text
     time.sleep(2)
 
@@ -185,7 +175,6 @@ def step_verificar_mensaje_ganador(context):
 
 # --------------------------------------- Perder el Juego -------------------------------------------------------------
 
-# Función para ingresar una letra incorrecta en el campo de entrada
 def ingresar_letra_incorrecta(page, letra):
     input_selector = 'input[name="letra"]'
     page.wait_for_selector(input_selector)
@@ -207,10 +196,8 @@ async def step_abrir_pagina_del_juego(context):
 async def step_adivino_incorrectamente(context):
     await step_abrir_pagina_del_juego(context)
 
-    # Obtener la palabra oculta de la página
     palabra_oculta = await context.page.inner_text('#palabra h2').strip().lower()
 
-    # Lista de letras incorrectas
     letras_incorrectas = ['x'] * 6
 
     for letra in letras_incorrectas:

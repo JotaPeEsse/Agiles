@@ -44,12 +44,12 @@ def juego():
                 fallos += 1
                 dibujo = ahoracado.crear_muñeco_ahorcado(fallos)
 
-        letras_ingresadas.append(letra)  # Agrega la letra ingresada a la lista de letras ingresadas
+        letras_ingresadas.append(letra)  
 
         session['escondida'] = escondida
         session['fallos'] = fallos
         session['dibujo'] = dibujo
-        session['letras_ingresadas'] = letras_ingresadas  # Actualiza la lista de letras ingresadas
+        session['letras_ingresadas'] = letras_ingresadas 
 
         intentos_restantes = ahoracado.contar_cantidad_intentos_restantes(fallos, max_fallos)
 
@@ -68,7 +68,7 @@ def juego():
         session['escondida'] = escondida
         session['fallos'] = 0
         session['dibujo'] = ahoracado.crear_muñeco_ahorcado(0)
-        session.pop('letras_ingresadas', None)  # Reinicia la lista de letras ingresadas
+        session.pop('letras_ingresadas', None)  
 
         return render_template('juego.html', palabra=palabra, escondida=escondida, fallos=0, dibujo=ahoracado.crear_muñeco_ahorcado(0), resultado='continuar', max_fallos=max_fallos, intentos_restantes=6)
 
