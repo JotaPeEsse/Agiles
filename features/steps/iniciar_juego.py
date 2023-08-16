@@ -7,7 +7,7 @@ from behave import given, when, then
 import time
 
 # Definir el URL base para la página de juego
-BASE_URL = 'https://martinb.pythonanywhere.com/juego'
+BASE_URL = 'http://localhost:5000/juego'
 
 
 # ---------------------------------------Iniciar Juego-------------------------------------------------------------
@@ -17,12 +17,12 @@ async def step_estoy_en_pagina_inicio(context):
         browser = await p.chromium.launch(headless=False)
         context.browser = browser
         context.page = await browser.new_page()
-        await context.page.goto('https://martinb.pythonanywhere.com/')
+        await context.page.goto('http://localhost:5000')
         time.sleep(2)
 
 @when('hago clic en el botón "{button_text}"')
 async def step_hago_clic_en_jugar(context, button_text):
-    await context.page.goto('https://martinb.pythonanywhere.com/')
+    await context.page.goto('http://localhost:5000')
     await context.page.wait_for_selector(f'button:has-text("{button_text}")')
     button = await context.page.query_selector(f'button:has-text("{button_text}")')
     await button.click()
@@ -30,7 +30,7 @@ async def step_hago_clic_en_jugar(context, button_text):
 
 @then('debería ser redirigido a la página del juego')
 async def step_deberia_ser_redirigido(context):
-    target_url = 'https://martinb.pythonanywhere.com/juego'
+    target_url = 'http://localhost:5000/juego'
     current_url = context.page.url
     assert current_url == target_url, f"URL actual: {current_url}, URL objetivo: {target_url}"
     time.sleep(2)

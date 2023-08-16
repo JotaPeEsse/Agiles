@@ -4,6 +4,14 @@
 <html>
 <head>
     <title>Juego del Ahorcado</title>
+
+    <script>
+        function mostrarMensajeError() {
+            alert("¡Letra incorrecta! Por favor, ingresa una letra válida.");
+        }
+    </script>
+
+
 </head>
 
 <body>
@@ -21,7 +29,7 @@
             <h2 hidden>{{ palabra }}</h2>
         </div>
         <div id="intentos" style="color: rgb(136, 3, 3);">
-            <h2>Intentos restantes: {{ max_fallos - fallos }}</h2>
+            <h2>Intentos restantes: {{ intentos_restantes }}</h2>
         </div>
         <div id="letras-ingresadas">
             <h5>Letras ingresadas: {{ ' '.join(letras_ingresadas) }}</h5>
@@ -53,6 +61,18 @@
         {% endif %}
         
         <a href="{{ url_for('home') }}" class="btn-black">Volver al inicio</a>
+    </div>
+
+    <div id="flash-messages" style="color: black; padding: 20px">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <h4>{{ message }}</h4>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
     </div>
 
     {% endblock %}
