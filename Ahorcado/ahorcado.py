@@ -30,7 +30,7 @@ class Ahorcado:
         return letra in palabra
 
     def palabra_ganadora(self, palabra, palabra_correcta):
-        return palabra == palabra_correcta
+        return palabra != palabra_correcta
 
     def reemplazar_simbolo(self, original, escondida, simbolo):
         cantidad = original.count(simbolo)
