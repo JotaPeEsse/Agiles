@@ -160,4 +160,84 @@ def step_adivino_correctamente(context):
 def step_ver_dibujo_estado_inicial(context):
     page_source = context.page.content()
     soup = BeautifulSoup(page_source, 'html.parser')
-    dibujo_muñeco =
+    dibujo_muñeco = soup.find('div', id='dibujo').pre.text
+
+    assert '+---+' in dibujo_muñeco
+    assert 'O   |' not in dibujo_muñeco
+    time.sleep(2)
+
+
+@then('el número de intentos restantes debe mantenerse')
+def step_ver_intentos_restantes(context):
+    intentos_restantes_text = context.page.inner_text('#intentos h2')
+    assert 'Intentos restantes' in intentos_restantes_text
+    assert intentos_restantes_text.split()[-1] != ''  # Aseguramos que el valor no esté vacío
+    assert 'Intentos restantes: 6' in intentos_restantes_text
+    time.sleep(2)
+
+
+@then('debería ver el mensaje "¡Ganaste!"')
+def step_verificar_mensaje_ganador(context):
+    mensaje_ganador_element = context.page.wait_for_selector('#resultado h2')
+    mensaje_ganador = mensaje_ganador_element.inner_text()
+    assert '¡Ganaste!' in mensaje_ganador
+
+
+# --------------------------------------- Perder el Juego -------------------------------------------------------------
+
+# Función para ingresar una letra incorrecta en el campo de entrada
+def ingresar_letra_incorrecta(page, letra):
+    input_selector = 'input[name="letra"]'
+    page.wait_for_selector(input_selector)
+    page.fill(input_selector, letra)
+    page.click('button[type="submit"]')
+
+
+@given('que estoy en la página del juego')
+async def step_abrir_pagina_del_juego(context):
+    async with async_playwright() as p:
+        browser = await p.chromium.launch(headless=False)
+        context.browser = browser
+        context.page = await browser.new_page()
+        await context.page.goto(BASE_URL)
+        time.sleep(2)
+
+
+@when('adivino incorrectamente todas las letras de la palabra oculta')
+async def step_adivino_incorrectamente(context):
+    await step_abrir_pagina_del_juego(context)
+
+    # Obtener la palabra oculta de la página
+    palabra_oculta = await context.page.inner_text('#palabra h2').strip().lower()
+
+    # Lista de letras incorrectas
+    letras_incorrectas = ['x'] * 6
+
+    for letra in letras_incorrectas:
+        await asyncio.sleep(2)
+        await ingresar_letra_incorrecta(context.page, letra)
+    time.sleep(2)
+
+
+@then('debería ver el dibujo completo del muñeco del ahorcado')
+async def step_verificar_dibujo_completo(context):
+    page_source = await context.page.content()
+    assert '+---+' in page_source
+    assert 'O   |' in page_source
+    assert '/|\\  |' in page_source
+    assert '/ \\  |' in page_source
+
+
+@then('el número de intentos restantes debería llegar a cero')
+async def step_verificar_numero_intentos_cero(context):
+    intentos_restantes_text = await context.page.inner_text('#intentos h2')
+    assert 'Intentos restantes: 0' in intentos_restantes_text
+    time.sleep(2)
+
+
+@then('debería ver el mensaje "¡Perdiste!"')
+async def step_verificar_mensaje_perdiste(context):
+    mensaje_perdiste_element = await context.page.wait_for_selector('#resultado h2')
+    mensaje_perdiste = await mensaje_perdiste_element.inner_text()
+    assert '¡Perdiste!' in mensaje_perdiste
+    time.sleep(2)
